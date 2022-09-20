@@ -16,6 +16,7 @@
 #' @param searchInt Interval for numerical search over replication standard
 #'     errors
 #'
+#'
 #' @return An ssdRS object containing the design prior, the recomputed power,
 #'     the required replication standard error sr, and the relative sample size
 #'     c = so^2/sr^2 = nr/no
