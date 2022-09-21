@@ -1,21 +1,15 @@
 #' @title Sample size determination for replication success based on
-#'     meta-analytic significance
+#'     replication Bayes factor
 #'
 #' @description This function computes the standard error required to achieve
-#'     replication success with a certain probability and based on statistical
-#'     significance of the fixed-effects meta-analytic effect estimate.
+#'     replication success with a certain probability and based on the
+#'     replication Bayes factor under normality
 #'
-#' @details The probability of replication success .....
-#'
-#' @md
-#'
-#' @param level Significance level (one-sided) for the replication effect
-#'     estimate
+#' @param level Bayes factor level below which replication success is achieved
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #' @param searchInt Interval for numerical search over replication standard
 #'     errors
-#'
 #'
 #' @return An ssdRS object containing the design prior, the recomputed power,
 #'     the required replication standard error sr, and the relative sample size
@@ -31,14 +25,15 @@
 #'
 #' @examples
 #' ## specify design prior
-#' to1 <- 2
-#' so1 <- 1
-#' dprior <- designPrior(to = to1, so = so1, tau = 0.1, sp = 2)
-#' ssdMeta(level = 0.025^2, dprior = dprior, power = 0.9)
+#' to1 <- 0.2
+#' so1 <- 0.05
+#' dprior <- designPrior(to = to1, so = so1, tau = 0.03)
+#' ssdBFr(level = 1/10, dprior = dprior, power = 0.8)
 #'
 #' @export
 
-ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
+ssdBFr <- function(level, dprior, power,
+                   searchInt = c(.Machine$double.eps^0.5, 2)) {
     ## input checks
     stopifnot(
         length(level) == 1,
@@ -61,7 +56,7 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
     )
 
     ## computing bound of probability of replication success
-    limP <- porsMeta(level = level, dprior = dprior, sr = 0)
+    limP <- porsBFr(level = level, dprior = dprior, sr = .Machine$double.eps)
     if (power > limP) {
         warning(paste0("Power not achievable with specified design prior (at most ",
                        round(limP, 3), ")"))
@@ -70,7 +65,7 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
     } else {
         ## computing replication standard error sr
         rootFun1 <- function(sr) {
-            porsMeta(level = level, dprior = dprior, sr = sr) - power
+            porsBFr(level = level, dprior = dprior, sr = sr) - power
         }
         rootFun <- Vectorize(FUN = rootFun1)
         res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root)
@@ -81,9 +76,8 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
         } else {
             sr <- res
             ## computing probability of replication success
-            outPow <- porsMeta(level = level, dprior = dprior, sr = sr)
+            outPow <- porsBFr(level = level, dprior = dprior, sr = sr)
         }
-
     }
 
     ## create output object
@@ -95,15 +89,12 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
 }
 
 
-#' @title Probability of replication success based on meta-analytic significance
+#' @title Probability of replication success based on replication Bayes factor
 #'
 #' @description This function computes the probability to achieve replication
-#'     success on statistical significance of the (fixed effects) meta-analytic
-#'     effect estimate
+#'     success based on the replication Bayes factor
 #'
-#' @param level Significance level for p-value of the meta-analytic effect
-#'     estimate (one-sided in the same direction as the original effect
-#'     estimate)
+#' @param level Bayes factor level below which replication success is achieved
 #' @param dprior Design prior object
 #' @param sr Replication standard error
 #'
@@ -119,20 +110,20 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
 #'
 #' @examples
 #' ## specify design prior
-#' to1 <- 2
-#' so1 <- 1
-#' dprior <- designPrior(to = to1, so = so1, tau = 0.1)
-#' porsMeta(level = 0.025^2, dprior = dprior, sr = 0.2)
+#' to1 <- 0.2
+#' so1 <- 0.05
+#' dprior <- designPrior(to = to1, so = so1, tau = 0.03)
+#' porsBFr(level = 1/10, dprior = dprior, sr = 0.05)
 #'
 #' @export
 
-porsMeta <- function(level, dprior, sr) {
+porsBFr <- function(level, dprior, sr) {
     ## input checks
     stopifnot(
         length(level) == 1,
         is.numeric(level),
         is.finite(level),
-        0 < level, level < 1,
+        0 < level,
 
         class(dprior) == "designPrior",
 
@@ -142,35 +133,36 @@ porsMeta <- function(level, dprior, sr) {
         0 <= sr
     )
 
-    ## success region depends on direction of original estimate
-    so <- dprior$so
-    to <- dprior$to
-    if (sign(dprior$to) >= 0) {
-        lowerLim <- stats::qnorm(p = 1 - level)*sr*sqrt(1 + sr^2/so^2) -
-            to*sr^2/so^2
-        sregion <- successRegion(intervals = cbind(lowerLim, Inf))
-    } else {
-        upperLim <- stats::qnorm(p = level)*sr*sqrt(1 + sr^2/so^2) -
-            to*sr^2/so^2
-        sregion <- successRegion(cbind(-Inf, upperLim))
-    }
-
     ## compute probability of replication success
+    to <- dprior$to
+    so <- dprior$so
+    c <- so^2/sr^2
+    A <- sr^2*(1 +1/c)*(to^2/so^2 - 2*log(level) + log(1 + c))
+    sregion <- successRegion(intervals = rbind(c(-Inf, -sqrt(A) - to/c),
+                                               c(sqrt(A) - to/c, Inf)))
     pors(sregion = sregion, dprior = dprior, sr = sr)
 }
 
 
-## ## checking some stuff
-## pmeta <- function(to, tr, so, sr) {
-##     sm <- 1/sqrt(1/so^2 + 1/sr^2)
-##     tm <- sm^2*(to/so^2 + tr/sr^2)
-##     return(stats::pnorm(q = tm/sm, lower = FALSE))
+## ## ## checking some stuff
+## ## BFr <- function(to, tr, so, sr) {
+## ##     stats::dnorm(x = tr, sd = sr) /
+## ##         stats::dnorm(x = tr, mean = to, sd = sqrt(so^2 + sr^2))
+## ## }
+## to <- 0.2
+## so <- 0.04
+## sr <- 0.06
+## zo <- to/so
+## c <- so^2/sr^2
+## gamma <- 1/10
+## A <- sr^2*(1 + sr^2/so^2)*(to^2/so^2 - 2*log(gamma) + log(1 + so^2/sr^2))
+## tr <- sqrt(A) - to*sr^2/so^2
+## BFr(to, tr, so, sr)
+## sRegionBFr <- function(sr) {
+##     A <- sr^2*(1 + sr^2/so^2)*(to^2/so^2 - 2*log(gamma) + log(1 + so^2/sr^2))
+##     successRegion(intervals = rbind(c(-Inf, -sqrt(A) - to*sr^2/so^2),
+##                                     c(sqrt(A) - to*sr^2/so^2, Inf)))
 ## }
-## to <- 0.5
-## so <- 0.8
-## sr <- 1.1
-## sm <- 1/sqrt(1/so^2 + 1/sr^2)
-## za <- stats::qnorm(p = 0.975)
-## tr <- sr^2*(za/sm - to/so^2)
-## tr <- sr*za*sqrt(1 + sr^2/so^2) - to*sr^2/so^2
-## pmeta(to = to, tr = tr, so = so, sr = sr)
+## sRegionBFr(0.05)
+## ssdRS(sregionfun = sRegionBFr, dprior = designPrior(to = to, so = so),
+##       power = 0.8)

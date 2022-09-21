@@ -12,7 +12,7 @@
 #'     effect estimate as a function of the replication standard error
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
-#' @param searchinterval Search interval for standard errors
+#' @param searchInt Search interval for standard errors
 #' @param ... other arguments for uniroot
 #'
 #' @return An ssdRS object containing the design prior, the recomputed power,
@@ -37,24 +37,13 @@
 #' sregionfunSig <- function(sr, alpha = 0.025) {
 #'     successRegion(intervals = cbind(stats::qnorm(p = 1- alpha)*sr, Inf))
 #' }
-#' ssdRS(sregionfun = sregionfunSig, dprior = dprior, power = 0.8)
-#'
-#' ## compute required standard error for replication BF = 1/10
-#' ## TODO fix
-#' # sregionfunBFr <- function(sr, level = 1/10, to = to1, so = so1) {
-#' #   zo <- to/so
-#' #   c <- so^2/sr^2
-#' #   m <- sqrt((zo^2 + log(1 + c) - 2*log(level))*(1 + 1/c))
-#' #   successRegion(intervals = rbind(c(-Inf, sr*(-sqrt(m) - zo/sqrt(c))),
-#' #                                   c(sr*(sqrt(m) - zo/sqrt(c)), Inf)))
-#' #
-#' # sdRS(sregionfun = sregionfunBFr, dprior = dprior, power = 0.6)
+#' ssd(sregionfun = sregionfunSig, dprior = dprior, power = 0.8)
 #'
 #' @export
 
-ssdRS <- function(sregionfun, dprior, power,
-                  searchinterval = c(.Machine$double.eps^0.5, 100),
-                  ...) {
+ssd <- function(sregionfun, dprior, power,
+                searchInt = c(.Machine$double.eps^0.5, 2),
+                ...) {
     ## input checks
     stopifnot(
         is.function(sregionfun),
@@ -66,28 +55,40 @@ ssdRS <- function(sregionfun, dprior, power,
         is.finite(power),
         0 < power, power < 1,
 
-        length(searchinterval) == 2,
-        is.numeric(searchinterval),
-        all(is.finite(searchinterval)),
-        searchinterval[2] > searchinterval[1]
+        length(searchInt) == 2,
+        is.numeric(searchInt),
+        all(is.finite(searchInt)),
+        0 <= searchInt[1], searchInt[1] < searchInt[2]
     )
 
-    ## numerical search for log replication standard error such that probability
-    ## of replication success = power
-    rootFun1 <- function(logsr) {
-        sregion <- sregionfun(exp(logsr))
-        probRS(sregion = sregion, dprior = dprior, sr = exp(logsr)) - power
-    }
-    rootFun <- Vectorize(rootFun1)
-    res <- try(stats::uniroot(f = rootFun, interval = log(searchinterval),
-                              ... = ...)$root)
-    if (inherits(res, "try-error")) {
+    ## check whether specified power achievable
+    sregionLim <- sregionfun(.Machine$double.eps)
+    limP <- pors(sregion = sregionLim, dprior = dprior, sr = .Machine$double.eps)
+    if (power > limP) {
+        warning(paste0("Power not achievable with specified design prior (at most ",
+                       round(limP, 3), ")"))
         sr <- NaN
         outPow <- NaN
     } else {
-        sr <- exp(res)
-        outPow <- rootFun(log(sr)) + power
-    }
+        ## numerical search for log replication standard error such that probability
+        ## of replication success = power
+        rootFun1 <- function(logsr) {
+            sregion <- sregionfun(exp(logsr))
+            pors(sregion = sregion, dprior = dprior, sr = exp(logsr)) - power
+        }
+        rootFun <- Vectorize(rootFun1)
+        ## TODO implement check for powerLimit > power
+        res <- try(stats::uniroot(f = rootFun, interval = log(searchInt),
+                                  ... = ...)$root)
+        if (inherits(res, "try-error")) {
+            sr <- NaN
+            outPow <- NaN
+            warning("Numerical problems, try adjusting searchInt")
+        } else {
+            sr <- exp(res)
+            outPow <- rootFun(log(sr)) + power
+        }
+        }
 
     ## create output object
     out <- list("designPrior" = dprior, "power" = power,
@@ -111,7 +112,7 @@ ssdRS <- function(sregionfun, dprior, power,
 #' sregionfunSig <- function(sr, alpha = 0.025) {
 #'     successRegion(intervals = cbind(stats::qnorm(p = 1- alpha)*sr, Inf))
 #' }
-#' ssd1 <- ssdRS(sregionfun = sregionfunSig, dprior = dprior, power = 0.8)
+#' ssd1 <- ssd(sregionfun = sregionfunSig, dprior = dprior, power = 0.8)
 #' print(ssd1)
 #' @export
 print.ssdRS <- function(x, ...) {

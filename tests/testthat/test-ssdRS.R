@@ -29,7 +29,7 @@ resultsDF <- do.call("rbind", lapply(X = seq(1, nrow(testGrid)), FUN = function(
     power <- testGrid$power[i]
     dp <- designPrior(to = to, so = so, mu = mu, sp = sp, tau = tau)
     ## compute numerically with ssdRS
-    ssd <- ssdRS(sregionfun = sregionfunSig, dprior = dp, power = power)
+    ssd <- ssd(sregionfun = sregionfunSig, dprior = dp, power = power)
     ## compute analytically with formula
     ## TODO implement formula
     sr_analyt <- NaN

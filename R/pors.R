@@ -4,9 +4,6 @@
 #'     based on a success region for the replication effect estimate, a
 #'     design prior, and a replication standard error.
 #'
-#' @details The probability of replication success .....
-#'
-#' @md
 #'
 #' @param sregion Success region for replication effect estimate
 #' @param dprior Design prior object
@@ -25,10 +22,10 @@
 #' @examples
 #' dprior <- designPrior(to = 1.1, so = 1)
 #' sregion <- successRegion(intervals = cbind(1.96, Inf))
-#' probRS(sregion = sregion, dprior = dprior, sr = 1)
+#' pors(sregion = sregion, dprior = dprior, sr = 1)
 #'
 #' @export
-probRS <- function(sregion, dprior, sr) {
+pors <- function(sregion, dprior, sr) {
     ## input checks
     stopifnot(
         class(sregion) == "successRegion",
@@ -38,16 +35,16 @@ probRS <- function(sregion, dprior, sr) {
         length(sr) == 1,
         is.numeric(sr),
         is.finite(sr),
-        0 < sr
+        0 <= sr
     )
 
     ## compute parameters of predictive distribution of replication effect
     ## estimate
-    trMean <- dprior$dpMean
-    trSD <- sqrt(dprior$dpVar + dprior$tau^2 + sr^2)
+    dpmean <- dprior$dpMean
+    dpsd <- sqrt(dprior$dpVar + dprior$tau^2 + sr^2)
 
     ## compute probability of replication success
-    p <- sum(stats::pnorm(q = sregion[,2], mean = trMean, sd = trSD) -
-             stats::pnorm(q = sregion[,1], mean = trMean, sd = trSD))
+    p <- sum(stats::pnorm(q = sregion[,2], mean = dpmean, sd = dpsd) -
+             stats::pnorm(q = sregion[,1], mean = dpmean, sd = dpsd))
     return(p)
 }

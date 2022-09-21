@@ -16,7 +16,7 @@
 #' designing replication studies. arXiv preprint.
 #' \doi{10.48550/arXiv.XXXX.XXXXX}
 #'
-#' @seealso \code{\link{probRS}}
+#' @seealso \code{\link{pors}}, \code{\link{ssd}}
 #'
 #' @examples
 #' successRegion(intervals = rbind(c(1.96, Inf), c(-Inf, -1.96)))

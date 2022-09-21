@@ -28,7 +28,7 @@ designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.XXXX.XXXXX}
 }
 \seealso{
-\code{\link{probRS}}
+\code{\link{pors}}, \code{\link{ssd}}
 }
 \author{
 Samuel Pawel
