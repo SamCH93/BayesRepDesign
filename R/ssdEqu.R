@@ -86,11 +86,10 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
             outPow <- NaN
         } else {
             ## computing replication standard error sr
-            rootFun1 <- function(sr) {
+            rootFun <- function(sr) {
                 porsEqu(level = level, dprior = dprior, margin = margin,
                         sr = sr) - power
             }
-            rootFun <- Vectorize(FUN = rootFun1)
             res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root)
             if (inherits(res, "try-error")) {
                 sr <- NaN
@@ -140,7 +139,7 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
 #' to1 <- 2
 #' so1 <- 0.05
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.1)
-#' porsEqu(level = 0.1, dprior = dprior, margin = 0.3, sr = 0.05)
+#' porsEqu(level = 0.1, dprior = dprior, margin = 0.3, sr = c(0.05, 0.03))
 #'
 #' @export
 
@@ -159,25 +158,27 @@ porsEqu <- function(level, dprior, margin, sr) {
         is.finite(margin),
         margin > 0,
 
-        length(sr) == 1,
+        length(sr) > 0,
         is.numeric(sr),
-        is.finite(sr),
-        0 <= sr
+        all(is.finite(sr)),
+        all(0 <= sr)
     )
 
-    ## compute probability of replication success
-    to <- dprior$to
-    so <- dprior$so
-    sdiff <- sqrt(so^2 + sr^2)
-    za <- stats::qnorm(p = 1 - level)
-    if (margin <= za*sdiff) {
-        p <- 0
-    } else {
-        sregion <- successRegion(intervals = cbind(to - margin + za*sdiff,
-                                                   to + margin - za*sdiff))
-        p <- pors(sregion = sregion, dprior = dprior, sr = sr)
-    }
-    return(p)
+    ps <- vapply(X = sr, FUN = function(sr1) {
+        ## compute probability of replication success
+        to <- dprior$to
+        so <- dprior$so
+        sdiff <- sqrt(so^2 + sr1^2)
+        za <- stats::qnorm(p = 1 - level)
+        if (margin <= za*sdiff) {
+            p <- 0
+        } else {
+            sregion <- successRegion(intervals = cbind(to - margin + za*sdiff,
+                                                       to + margin - za*sdiff))
+            p <- pors(sregion = sregion, dprior = dprior, sr = sr1)
+        }
+        return(p)}, FUN.VALUE = 1)
+    return(ps)
 }
 
 

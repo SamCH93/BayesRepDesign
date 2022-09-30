@@ -4,7 +4,7 @@
 \alias{ssd}
 \title{Sample size determination for replication success}
 \usage{
-ssd(sregionfun, dprior, power, searchInt = c(.Machine$double.eps^0.5, 2), ...)
+ssd(sregionfun, dprior, power, searchInt = c(.Machine$double.eps^0.5, 4), ...)
 }
 \arguments{
 \item{sregionfun}{Function that returns the success region for replication

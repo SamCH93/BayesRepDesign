@@ -29,9 +29,9 @@
 #' @examples
 #' ## specify design prior
 #' to1 <- 2
-#' so1 <- 1
+#' so1 <- 0.5
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.1)
-#' ssdSig(level = 0.025, dprior = dprior, power = 0.8)
+#' ssdSig(level = 0.025, dprior = dprior, power = 0.9)
 #'
 #' @export
 
@@ -52,15 +52,20 @@ ssdSig <- function(level, dprior, power) {
         level < power
     )
 
-    ## computing standard normal quantiles for power calculation
-    za <- stats::qnorm(p = 1 - level)
-    zb <- stats::qnorm(p = 1 - power)
-
     ## extracting design prior parameters
     tau <- dprior$tau
     dpmean <- dprior$dpMean
     dpvar <- dprior$dpVar
     so <- dprior$so
+    to <- dprior$to
+
+    ## computing standard normal quantiles for power calculation
+    if (sign(to) > 0) {
+        za <- stats::qnorm(p = 1 - level)
+    } else {
+        za <- stats::qnorm(p = level)
+    }
+    zb <- stats::qnorm(p = power)
 
     ## computing bound of probability of replication success
     limP <- porsSig(level = level, dprior = dprior, sr = 0)
@@ -71,7 +76,7 @@ ssdSig <- function(level, dprior, power) {
         outPow <- NaN
     } else {
         ## computing replication standard error sr analytically
-        sr <- (dpmean*za + zb*sqrt((za^2 - zb^2)*(tau^2 + dpvar) +
+        sr <- (dpmean*za - zb*sqrt((za^2 - zb^2)*(tau^2 + dpvar) +
                                dpmean^2))/((za^2 - zb^2))
 
         ## computing probability of replication success
@@ -113,7 +118,7 @@ ssdSig <- function(level, dprior, power) {
 #' to1 <- 2
 #' so1 <- 1
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.1)
-#' porsSig(level = 0.025, dprior = dprior, sr = 0.5)
+#' porsSig(level = 0.025, dprior = dprior, sr = c(0.5, 0.3))
 #'
 #' @export
 
@@ -127,19 +132,23 @@ porsSig <- function(level, dprior, sr) {
 
         class(dprior) == "designPrior",
 
-        length(sr) == 1,
+        length(sr) > 0,
         is.numeric(sr),
-        is.finite(sr),
-        0 <= sr
+        all(is.finite(sr)),
+        all(0 <= sr)
     )
 
-    ## success region depends on direction of original estimate
-    if (sign(dprior$to) >= 0) {
-        sregion <- successRegion(intervals = cbind(stats::qnorm(p = 1 - level)*sr, Inf))
-    } else {
-        sregion <- successRegion(cbind(-Inf, stats::qnorm(p = level)*sr))
-    }
+    ps <- vapply(X = sr, FUN = function(sr1) {
+        ## success region depends on direction of original estimate
+        if (sign(dprior$to) >= 0) {
+            sregion <- successRegion(intervals = cbind(stats::qnorm(p = 1 - level)*sr1, Inf))
+        } else {
+            sregion <- successRegion(cbind(-Inf, stats::qnorm(p = level)*sr1))
+        }
 
-    ## compute probability of replication success
-    pors(sregion = sregion, dprior = dprior, sr = sr)
+        ## compute probability of replication success
+        p <- pors(sregion = sregion, dprior = dprior, sr = sr1)
+        return(p)
+    }, FUN.VALUE = 1)
+    return(ps)
 }

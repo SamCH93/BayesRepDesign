@@ -1,11 +1,12 @@
 #' @title Sample size determination for replication success based on
-#'     replication Bayes factor
+#'     the sceptical Bayes factor
 #'
 #' @description This function computes the standard error required to achieve
 #'     replication success with a certain probability and based on the
-#'     replication Bayes factor under normality
+#'     Bayes factor
 #'
-#' @param level Bayes factor level below which replication success is achieved
+#' @param level Threshold for the sceptical Bayes factor below which
+#'     replication success is achieved
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #' @param searchInt Interval for numerical search over replication standard
@@ -28,11 +29,11 @@
 #' to1 <- 0.2
 #' so1 <- 0.05
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.03)
-#' ssdBFr(level = 1/10, dprior = dprior, power = 0.8)
+#' ssdBFs(level = 1/10, dprior = dprior, power = 0.6)
 #'
 #' @export
 
-ssdBFr <- function(level, dprior, power,
+ssdBFs <- function(level, dprior, power,
                    searchInt = c(.Machine$double.eps^0.5, 2)) {
     ## input checks
     stopifnot(
@@ -56,16 +57,16 @@ ssdBFr <- function(level, dprior, power,
     )
 
     ## computing bound of probability of replication success
-    limP <- porsBFr(level = level, dprior = dprior, sr = .Machine$double.eps)
+    limP <- porsBFs(level = level, dprior = dprior, sr = .Machine$double.eps^0.5)
     if (power > limP) {
         warning(paste0("Power not achievable with specified design prior (at most ",
                        round(limP, 3), ")"))
         sr <- NaN
         outPow <- NaN
     } else {
-        ## computing replication standard error sr
+       ## computing replication standard error sr
         rootFun <- function(sr) {
-            porsBFr(level = level, dprior = dprior, sr = sr) - power
+            porsBFs(level = level, dprior = dprior, sr = sr) - power
         }
         res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root)
         if (inherits(res, "try-error")) {
@@ -75,7 +76,7 @@ ssdBFr <- function(level, dprior, power,
         } else {
             sr <- res
             ## computing probability of replication success
-            outPow <- porsBFr(level = level, dprior = dprior, sr = sr)
+            outPow <- porsBFs(level = level, dprior = dprior, sr = sr)
         }
     }
 
@@ -88,12 +89,13 @@ ssdBFr <- function(level, dprior, power,
 }
 
 
-#' @title Probability of replication success based on replication Bayes factor
+#' @title Probability of replication success based on the sceptical Bayes factor
 #'
 #' @description This function computes the probability to achieve replication
-#'     success based on the replication Bayes factor
+#'     success based on the Bayes factor
 #'
-#' @param level Bayes factor level below which replication success is achieved
+#' @param level Threshold for the sceptical Bayes factor below which replication
+#'     success is achieved
 #' @param dprior Design prior object
 #' @param sr Replication standard error
 #'
@@ -111,18 +113,18 @@ ssdBFr <- function(level, dprior, power,
 #' ## specify design prior
 #' to1 <- 0.2
 #' so1 <- 0.05
-#' dprior <- designPrior(to = to1, so = so1, tau = 0.03)
-#' porsBFr(level = 1/10, dprior = dprior, sr = c(0.05, 0.04))
+#' dprior <- designPrior(to = to1, so = so1)
+#' porsBFs(level = 1/38.7, dprior = dprior, sr = 0.05)
 #'
 #' @export
 
-porsBFr <- function(level, dprior, sr) {
+porsBFs <- function(level, dprior, sr) {
     ## input checks
     stopifnot(
         length(level) == 1,
         is.numeric(level),
         is.finite(level),
-        0 < level,
+        0 < level, level < 1,
 
         class(dprior) == "designPrior",
 
@@ -133,39 +135,48 @@ porsBFr <- function(level, dprior, sr) {
     )
 
     ps <- vapply(X = sr, FUN = function(sr1) {
-        ## compute probability of replication success
-        to <- dprior$to
+        ## compute success region
         so <- dprior$so
-        c <- so^2/sr1^2
-        A <- sr1^2*(1 +1/c)*(to^2/so^2 - 2*log(level) + log(1 + c))
-        sregion <- successRegion(intervals = rbind(c(-Inf, -sqrt(A) - to/c),
-                                                   c(sqrt(A) - to/c, Inf)))
-        p <- pors(sregion = sregion, dprior = dprior, sr = sr1)
+        to <- dprior$to
+        zo <- to/so
+        s <- BayesRep::vss(x = zo, gamma = level) # relative prior variance
+        if (is.nan(s)) {
+            p <- 0
+        } else {
+            c <- so^2/sr1^2
+            A <- (-2*log(level) + 2*log(1 + c) - 2*log(1 + s*c) +
+                  zo^2/(1 - s))*(1/c + s)*(sr1^2 + so^2)/(1 - s)
+            M <- to*(1/c + s)/(1 - s)
+            if (s < 1) {
+                ints <- rbind(c(-Inf, -sqrt(A) - M),
+                    c(sqrt(A) - M, Inf))
+            } else if (isTRUE(all.equal(s, 1, tolerance = 0.0001))) {
+                X <- 2*log(level)*(so^2 + sr^2)/to
+                if (sign(to) > 0) {
+                    ints <- cbind(to - X, Inf)
+                } else {
+                    ints <- cbind(-Inf, to + X)
+                }
+            } else {
+                ints <- cbind(-sqrt(A) - M, sqrt(A) - M)
+            }
+            sregion <- successRegion(intervals = ints)
+            p <- pors(sregion = sregion, dprior = dprior, sr = sr1)
+        }
         return(p)
     }, FUN.VALUE = 1)
     return(ps)
 }
 
 
-## ## ## checking some stuff
-## ## BFr <- function(to, tr, so, sr) {
-## ##     stats::dnorm(x = tr, sd = sr) /
-## ##         stats::dnorm(x = tr, mean = to, sd = sqrt(so^2 + sr^2))
-## ## }
-## to <- 0.2
-## so <- 0.04
-## sr <- 0.06
-## zo <- to/so
-## c <- so^2/sr^2
+## ## some checks
+## so <- 1.5
+## sr <- 0.8
+## s <- c(0.8, 1.5)
 ## gamma <- 1/10
-## A <- sr^2*(1 + sr^2/so^2)*(to^2/so^2 - 2*log(gamma) + log(1 + so^2/sr^2))
-## tr <- sqrt(A) - to*sr^2/so^2
-## BFr(to, tr, so, sr)
-## sRegionBFr <- function(sr) {
-##     A <- sr^2*(1 + sr^2/so^2)*(to^2/so^2 - 2*log(gamma) + log(1 + so^2/sr^2))
-##     successRegion(intervals = rbind(c(-Inf, -sqrt(A) - to*sr^2/so^2),
-##                                     c(sqrt(A) - to*sr^2/so^2, Inf)))
-## }
-## sRegionBFr(0.05)
-## ssdRS(sregionfun = sRegionBFr, dprior = designPrior(to = to, so = so),
-##       power = 0.8)
+## to <- 2
+## tr <- 1.5
+## ## should be the same
+## tr^2/(sr^2 + s*so^2) - (tr - to)^2/(so^2 + sr^2)
+## so^2*(1 - s)/((sr^2 + s*so^2)*(sr^2 + so^2))*(tr + to*(sr^2 + s*so^2)/so^2/(1 - s))^2 +
+##     to^2/so^2/(s - 1)

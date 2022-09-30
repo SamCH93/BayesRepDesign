@@ -31,14 +31,14 @@
 #'
 #' @examples
 #' ## specify design prior
-#' to1 <- 2
+#' to1 <- 4
 #' so1 <- 1
-#' dprior <- designPrior(to = to1, so = so1, tau = 0.1, sp = 2)
-#' ssdMeta(level = 0.025^2, dprior = dprior, power = 0.9)
+#' dprior <- designPrior(to = to1, so = so1, tau = 0.25, sp = Inf)
+#' ssdMeta(level = 0.025^2, dprior = dprior, power = 0.8)
 #'
 #' @export
 
-ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
+ssdMeta <- function(level, dprior, power, searchInt = c(0, 10)) {
     ## input checks
     stopifnot(
         length(level) == 1,
@@ -69,12 +69,13 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
         outPow <- NaN
     } else {
         ## computing replication standard error sr
-        rootFun1 <- function(sr) {
+        rootFun <- function(sr) {
             porsMeta(level = level, dprior = dprior, sr = sr) - power
         }
-        rootFun <- Vectorize(FUN = rootFun1)
         res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root)
         if (inherits(res, "try-error")) {
+            ## TODO it happens that the power is always larger, what should we
+            ## do then?
             sr <- NaN
             outPow <- NaN
             warning("Numerical problems, try adjusting searchInt")
@@ -122,7 +123,7 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 2)) {
 #' to1 <- 2
 #' so1 <- 1
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.1)
-#' porsMeta(level = 0.025^2, dprior = dprior, sr = 0.2)
+#' porsMeta(level = 0.025^2, dprior = dprior, sr = c(0.2, 0.1))
 #'
 #' @export
 
@@ -136,27 +137,30 @@ porsMeta <- function(level, dprior, sr) {
 
         class(dprior) == "designPrior",
 
-        length(sr) == 1,
+        length(sr) > 0,
         is.numeric(sr),
-        is.finite(sr),
-        0 <= sr
+        all(is.finite(sr)),
+        all(0 <= sr)
     )
 
-    ## success region depends on direction of original estimate
-    so <- dprior$so
-    to <- dprior$to
-    if (sign(dprior$to) >= 0) {
-        lowerLim <- stats::qnorm(p = 1 - level)*sr*sqrt(1 + sr^2/so^2) -
-            to*sr^2/so^2
-        sregion <- successRegion(intervals = cbind(lowerLim, Inf))
-    } else {
-        upperLim <- stats::qnorm(p = level)*sr*sqrt(1 + sr^2/so^2) -
-            to*sr^2/so^2
-        sregion <- successRegion(cbind(-Inf, upperLim))
-    }
+    ps <- vapply(X = sr, FUN = function(sr1) {
+        ## success region depends on direction of original estimate
+        so <- dprior$so
+        to <- dprior$to
+        if (sign(dprior$to) >= 0) {
+            lowerLim <- stats::qnorm(p = 1 - level)*sr1*sqrt(1 + sr1^2/so^2) -
+                to*sr1^2/so^2
+            sregion <- successRegion(intervals = cbind(lowerLim, Inf))
+        } else {
+            upperLim <- stats::qnorm(p = level)*sr*sqrt(1 + sr1^2/so^2) -
+                to*sr1^2/so^2
+            sregion <- successRegion(cbind(-Inf, upperLim))
+        }
 
-    ## compute probability of replication success
-    pors(sregion = sregion, dprior = dprior, sr = sr)
+        ## compute probability of replication success
+        pors(sregion = sregion, dprior = dprior, sr = sr1)
+    }, FUN.VALUE = 1)
+    return(ps)
 }
 
 

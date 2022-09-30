@@ -42,7 +42,7 @@
 #' @export
 
 ssd <- function(sregionfun, dprior, power,
-                searchInt = c(.Machine$double.eps^0.5, 2),
+                searchInt = c(.Machine$double.eps^0.5, 4),
                 ...) {
     ## input checks
     stopifnot(
@@ -72,12 +72,10 @@ ssd <- function(sregionfun, dprior, power,
     } else {
         ## numerical search for log replication standard error such that probability
         ## of replication success = power
-        rootFun1 <- function(logsr) {
+        rootFun <- function(logsr) {
             sregion <- sregionfun(exp(logsr))
             pors(sregion = sregion, dprior = dprior, sr = exp(logsr)) - power
         }
-        rootFun <- Vectorize(rootFun1)
-        ## TODO implement check for powerLimit > power
         res <- try(stats::uniroot(f = rootFun, interval = log(searchInt),
                                   ... = ...)$root)
         if (inherits(res, "try-error")) {
@@ -120,7 +118,7 @@ print.ssdRS <- function(x, ...) {
     cat("\npower =", signif(x$power, 2), "(specified)")
     cat("\npower =", signif(x$powerRecomputed, 2), "(recomputed with sr)")
     cat("\nsr =", signif(x$sr, 2))
-    cat("\nc =", signif(x$c, 2))
+    cat("\nc = so^2/sr^2 ~= nr/no =", signif(x$c, 2))
     cat("\n\n")
     invisible(x)
 }

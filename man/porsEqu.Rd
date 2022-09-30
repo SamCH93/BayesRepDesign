@@ -29,7 +29,7 @@ This function computes the probability to achieve replication
 to1 <- 2
 so1 <- 0.05
 dprior <- designPrior(to = to1, so = so1, tau = 0.1)
-porsEqu(level = 0.1, dprior = dprior, margin = 0.3, sr = 0.05)
+porsEqu(level = 0.1, dprior = dprior, margin = 0.3, sr = c(0.05, 0.03))
 
 }
 \references{
