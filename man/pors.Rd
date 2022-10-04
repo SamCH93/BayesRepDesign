@@ -4,22 +4,27 @@
 \alias{pors}
 \title{Compute probability of replication success}
 \usage{
-pors(sregion, dprior, sr)
+pors(sregion, dprior, sr, nsites = 1)
 }
 \arguments{
 \item{sregion}{Success region for replication effect estimate}
 
 \item{dprior}{Design prior object}
 
-\item{sr}{Standard error of Replication effect estimate}
+\item{sr}{Standard error of replication effect estimate}
+
+\item{nsites}{Number of sites, defaults to 1. The sites are assumed to have
+the same standard error sr.}
 }
 \value{
 The probability of replication success
 }
 \description{
 This function computes the probabiliy of replication success
-    based on a success region for the replication effect estimate, a
-    design prior, and a replication standard error.
+    based on a success region for the replication effect estimate, a design
+    prior, and a replication standard error. If the specified number of sites
+    is larger than one, the supplied success region needs to be formulated in
+    terms of the average replication effect estimate.
 }
 \examples{
 dprior <- designPrior(to = 1.1, so = 1)

@@ -4,7 +4,14 @@
 \alias{ssd}
 \title{Sample size determination for replication success}
 \usage{
-ssd(sregionfun, dprior, power, searchInt = c(.Machine$double.eps^0.5, 4), ...)
+ssd(
+  sregionfun,
+  dprior,
+  power,
+  nsites = 1,
+  searchInt = c(.Machine$double.eps^0.5, 4),
+  ...
+)
 }
 \arguments{
 \item{sregionfun}{Function that returns the success region for replication
@@ -13,6 +20,9 @@ effect estimate as a function of the replication standard error}
 \item{dprior}{Design prior object}
 
 \item{power}{Desired probability of replication success}
+
+\item{nsites}{Number of sites. The default is 1. The sites are assumed to
+have the same sample size.}
 
 \item{searchInt}{Search interval for standard errors}
 

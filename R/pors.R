@@ -1,13 +1,17 @@
 #' @title Compute probability of replication success
 #'
 #' @description This function computes the probabiliy of replication success
-#'     based on a success region for the replication effect estimate, a
-#'     design prior, and a replication standard error.
+#'     based on a success region for the replication effect estimate, a design
+#'     prior, and a replication standard error. If the specified number of sites
+#'     is larger than one, the supplied success region needs to be formulated in
+#'     terms of the average replication effect estimate.
 #'
 #'
 #' @param sregion Success region for replication effect estimate
 #' @param dprior Design prior object
-#' @param sr Standard error of Replication effect estimate
+#' @param sr Standard error of replication effect estimate
+#' @param nsites Number of sites, defaults to 1. The sites are assumed to have
+#'     the same standard error sr.
 #'
 #' @return The probability of replication success
 #'
@@ -25,7 +29,7 @@
 #' pors(sregion = sregion, dprior = dprior, sr = c(1, 0.9))
 #'
 #' @export
-pors <- function(sregion, dprior, sr) {
+pors <- function(sregion, dprior, sr, nsites = 1) {
     ## input checks
     stopifnot(
         class(sregion) == "successRegion",
@@ -35,18 +39,23 @@ pors <- function(sregion, dprior, sr) {
         length(sr) > 0,
         is.numeric(sr),
         all(is.finite(sr)),
-        all(0 <= sr)
+        all(0 <= sr),
+
+        length(nsites) == 1,
+        is.numeric(nsites),
+        is.finite(nsites),
+        nsites > 0
     )
 
     ps <- vapply(X = sr, FUN = function(sr1) {
-        ## compute parameters of predictive distribution of replication effect
-        ## estimate
-        dpmean <- dprior$dpMean
-        dpsd <- sqrt(dprior$dpVar + dprior$tau^2 + sr1^2)
+        ## compute parameters of predictive distribution of (average)
+        ## replication effect estimate
+        predmean <- dprior$dpMean
+        predsd <- sqrt(dprior$dpVar + (dprior$tau^2 + sr1^2)/nsites)
 
         ## compute probability of replication success
-        p <- sum(stats::pnorm(q = sregion[,2], mean = dpmean, sd = dpsd) -
-                 stats::pnorm(q = sregion[,1], mean = dpmean, sd = dpsd))
+        p <- sum(stats::pnorm(q = sregion[,2], mean = predmean, sd = predsd) -
+                 stats::pnorm(q = sregion[,1], mean = predmean, sd = predsd))
     }, FUN.VALUE = 1)
     return(ps)
 }

@@ -12,6 +12,8 @@
 #'     effect estimate as a function of the replication standard error
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
+#' @param nsites Number of sites. The default is 1. The sites are assumed to
+#'     have the same sample size.
 #' @param searchInt Search interval for standard errors
 #' @param ... other arguments for uniroot
 #'
@@ -41,7 +43,7 @@
 #'
 #' @export
 
-ssd <- function(sregionfun, dprior, power,
+ssd <- function(sregionfun, dprior, power, nsites = 1,
                 searchInt = c(.Machine$double.eps^0.5, 4),
                 ...) {
     ## input checks
@@ -55,6 +57,11 @@ ssd <- function(sregionfun, dprior, power,
         is.finite(power),
         0 < power, power < 1,
 
+        length(nsites) == 1,
+        is.numeric(nsites),
+        is.finite(nsites),
+        nsites > 0,
+
         length(searchInt) == 2,
         is.numeric(searchInt),
         all(is.finite(searchInt)),
@@ -63,7 +70,8 @@ ssd <- function(sregionfun, dprior, power,
 
     ## check whether specified power achievable
     sregionLim <- sregionfun(.Machine$double.eps)
-    limP <- pors(sregion = sregionLim, dprior = dprior, sr = .Machine$double.eps)
+    limP <- pors(sregion = sregionLim, dprior = dprior, sr = .Machine$double.eps,
+                 nsites = nsites)
     if (power > limP) {
         warning(paste0("Power not achievable with specified design prior (at most ",
                        round(limP, 3), ")"))
@@ -74,7 +82,8 @@ ssd <- function(sregionfun, dprior, power,
         ## of replication success = power
         rootFun <- function(logsr) {
             sregion <- sregionfun(exp(logsr))
-            pors(sregion = sregion, dprior = dprior, sr = exp(logsr)) - power
+            pors(sregion = sregion, dprior = dprior, sr = exp(logsr),
+                 nsites = nsites) - power
         }
         res <- try(stats::uniroot(f = rootFun, interval = log(searchInt),
                                   ... = ...)$root)
