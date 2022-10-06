@@ -139,16 +139,83 @@ porsSig <- function(level, dprior, sr) {
     )
 
     ps <- vapply(X = sr, FUN = function(sr1) {
-        ## success region depends on direction of original estimate
-        if (sign(dprior$to) >= 0) {
-            sregion <- successRegion(intervals = cbind(stats::qnorm(p = 1 - level)*sr1, Inf))
-        } else {
-            sregion <- successRegion(cbind(-Inf, stats::qnorm(p = level)*sr1))
-        }
-
         ## compute probability of replication success
+        sregion <- successRegionSig(sr = sr1, to = dprior$to, tau = 0,
+                                    nsites = 1, level = level)
         p <- pors(sregion = sregion, dprior = dprior, sr = sr1)
         return(p)
     }, FUN.VALUE = 1)
     return(ps)
+}
+
+
+#' @title Success region based on significance
+#'
+#' @description This function returns the success region for the (average)
+#'     replication effect estimate to achieve significance
+#'
+#' @param sr Replication standard error
+#' @param to Original effect estimate
+#' @param tau Heterogeneity standard deviation used in the calculation of the
+#'     weighted average replication effect estimate and its standard error.
+#'     Defaults to 0 (fixed effects analysis).
+#' @param nsites nsites Number of sites, defaults to 1. The effect estimates
+#'     from all sites are assumed to have the same standard error sr.
+#' @param level Significance level for p-value of the (average) replication
+#'     effect estimate (one-sided in the same direction as the original effect
+#'     estimate)
+#'
+#' @return A successRegion object
+#'
+#' @references
+#'
+#' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
+#' designing replication studies. arXiv preprint.
+#' \doi{10.48550/arXiv.XXXX.XXXXX}
+#'
+#' @author Samuel Pawel
+#'
+#' @examples
+#' successRegionSig(sr = 0.05, to = 0.2, tau = 0.01, nsites = 3, level = 0.025)
+#'
+#' @export
+
+successRegionSig <- function(sr, to, tau = 0, nsites = 1, level) {
+    ## input checks
+    stopifnot(
+        length(sr) == 1,
+        is.numeric(sr),
+        is.finite(sr),
+        0 <= sr,
+
+        length(to) == 1,
+        is.numeric(sr),
+        is.finite(sr),
+
+        length(tau) == 1,
+        is.numeric(tau),
+        is.finite(tau),
+        0 <= tau,
+
+        length(nsites) == 1,
+        is.numeric(nsites),
+        is.finite(nsites),
+        nsites > 0,
+
+        length(level) == 1,
+        is.numeric(level),
+        is.finite(level),
+        0 < level, level < 1
+    )
+
+    ## compute standard error of weighted average
+    srMA <- 1/sqrt(nsites/(sr^2 + tau^2))
+
+    ## success region depends on direction of original estimate
+    if (sign(to) >= 0) {
+        sregion <- successRegion(intervals = cbind(stats::qnorm(p = 1 - level)*srMA, Inf))
+    } else {
+        sregion <- successRegion(cbind(-Inf, stats::qnorm(p = level)*srMA))
+    }
+    return(sregion)
 }

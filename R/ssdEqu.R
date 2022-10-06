@@ -169,7 +169,7 @@ porsEqu <- function(level, dprior, margin, sr) {
         to <- dprior$to
         so <- dprior$so
         sdiff <- sqrt(so^2 + sr1^2)
-        za <- stats::qnorm(p = 1 - level)
+        za <- stats::qnorm(p = 1 - level/2)
         if (margin <= za*sdiff) {
             p <- 0
         } else {

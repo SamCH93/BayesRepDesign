@@ -26,7 +26,7 @@
 #' @examples
 #' dprior <- designPrior(to = 1.1, so = 1)
 #' sregion <- successRegion(intervals = cbind(1.96, Inf))
-#' pors(sregion = sregion, dprior = dprior, sr = c(1, 0.9))
+#' pors(sregion = sregion, dprior = dprior, sr = 1)
 #'
 #' @export
 pors <- function(sregion, dprior, sr, nsites = 1) {
