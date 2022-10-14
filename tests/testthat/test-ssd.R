@@ -41,13 +41,19 @@ resultsDF <- do.call("rbind", lapply(X = seq(1, nrow(testGrid)), FUN = function(
     ## compute analytically with formula
     res_ssdSig <- ssdSig(level = alpha, dprior = dp, power = power)
     ## meta-analysis
+    ## TODO implement for MA
     ## res_ssdMeta <- ssdMeta(level = alpha^2, dprior = dp, power = power,
     ##                        searchInt = c(0, 10))
     ## equivalence
+    ## TODO implement for Equ
     ## res_equivalence <- ssdEqu(level = alpha*4, dprior = dp, power = power,
     ##                           margin = 8, searchInt = c(0, 2))
     ## sceptical p-value
     res_ssdPs <- ssdPs(level = alpha*6, dprior = dp, power = power)
+    ## replication BF
+    ## TODO implement for BFr
+    ## sceptical BF
+    ## TODO implement for BFs
 
     ## return everything
     out <- data.frame(to = to, so = so, tau = tau, mu = mu, sp = sp,

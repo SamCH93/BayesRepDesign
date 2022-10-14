@@ -86,7 +86,9 @@ ssdSig <- function(level, dprior, power) {
     ## create output object
     out <- list("designPrior" = dprior, "power" = power,
                 "powerRecomputed" = outPow, "sr" = sr,
-                "c" = so^2/sr^2)
+                "c" = so^2/sr^2,
+                type = paste("replication p-value <=", signif(level, 3),
+                             "(exact computation)"))
     class(out) <- "ssdRS"
     return(out)
 }

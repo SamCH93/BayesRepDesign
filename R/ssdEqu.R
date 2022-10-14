@@ -106,7 +106,9 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
     ## create output object
     out <- list("designPrior" = dprior, "power" = power,
                 "powerRecomputed" = outPow, "sr" = sr,
-                "c" = so^2/sr^2)
+                "c" = so^2/sr^2,
+                type = paste("equivalence with confidence level =", signif(1 - level, 3),
+                             "and margin =", signif(margin, 3), "(numerical computation)"))
     class(out) <- "ssdRS"
     return(out)
 }

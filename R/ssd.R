@@ -100,7 +100,8 @@ ssd <- function(sregionfun, dprior, power, nsites = 1,
     ## create output object
     out <- list("designPrior" = dprior, "power" = power,
                 "powerRecomputed" = outPow, "sr" = sr,
-                "c" = dprior$so^2/sr^2)
+                "c" = dprior$so^2/sr^2,
+                type = "method agnostic success region (numerical computation)")
     class(out) <- "ssdRS"
     return(out)
 }
@@ -123,11 +124,23 @@ ssd <- function(sregionfun, dprior, power, nsites = 1,
 #' print(ssd1)
 #' @export
 print.ssdRS <- function(x, ...) {
+    ## cat("========================================================================\n")
+    cat("       Bayesian sample size calculation for replication studies\n")
+    ## cat("       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
+    cat("       ========================================================\n\n")
+    cat("success criterion and computation\n")
+    cat("------------------------------------------------------------------------")
+    cat("\n ", x$type, "\n\n")
     print(x$designPrior)
-    cat("\npower =", signif(x$power, 2), "(specified)")
-    cat("\npower =", signif(x$powerRecomputed, 2), "(recomputed with sr)")
-    cat("\nsr =", signif(x$sr, 2))
-    cat("\nc = so^2/sr^2 ~= nr/no =", signif(x$c, 2))
-    cat("\n\n")
+    cat("\nprobability of replication success\n")
+    cat("------------------------------------------------------------------------")
+    cat("\n  PoRS =", signif(x$power, 2), ": specified")
+    cat("\n  PoRS =", signif(x$powerRecomputed, 2), ": recomputed with sr\n")
+    cat("\nrequired sample size\n")
+    cat("------------------------------------------------------------------------")
+    cat("\n  sr =", signif(x$sr, 2), ": required standard error of replication effect estimate")
+    cat("\n  c = so^2/sr^2 ~= nr/no =", signif(x$c, 2), ": required relative variance / sample size")
+    cat("\n")
+    ## cat("========================================================================\n")
     invisible(x)
 }

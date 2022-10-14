@@ -120,19 +120,23 @@ designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
 #' dp <- designPrior(to = 0.5, so = 0.05, sp = 0.2, tau = 0.1)
 #' print(dp)
 #' @export
-print.designPrior <- function(x, ...) {
-    cat("\nInputs:")
-    cat("\nto =", signif(x$to, 2), ": original effect estimate")
-    cat("\nso =", signif(x$so, 2), ": standard error of original effect estimate")
-    cat("\ntau =", signif(x$tau, 2),
-        ": assumed heterogeneity standard deviation of effect sizes")
-    cat("\nN(mean = ", signif(x$mu, 2), ", sd = ", signif(x$sp, 2), ") ",
-        ": initial normal prior for overall effect size", sep = "")
 
-    cat("\n\nOutput:", "\nN(mean = ", signif(x$dpMean, 2), ", sd = ",
+print.designPrior <- function(x, ...) {
+    cat("original data and initial prior for effect size\n")
+    cat("------------------------------------------------------------------------")
+    cat("\n  to =", signif(x$to, 2), ": original effect estimate")
+    cat("\n  so =", signif(x$so, 2), ": standard error of original effect estimate")
+    cat("\n  tau =", signif(x$tau, 2),
+        ": assumed heterogeneity standard deviation")
+    cat("\n  N(mean = ", signif(x$mu, 2), ", sd = ", signif(x$sp, 2), ") ",
+        ": initial normal prior", sep = "")
+
+    cat("\n\ndesign prior for effect size\n")
+    cat("------------------------------------------------------------------------")
+    cat("\n  N(mean = ", signif(x$dpMean, 2), ", sd = ",
         signif(sqrt(x$dpVar), 2), ") ",
-        ": normal design prior for overall effect size", sep = "")
-    cat("\n\n")
+        ": normal design prior", sep = "")
+    cat("\n")
     invisible(x)
 }
 

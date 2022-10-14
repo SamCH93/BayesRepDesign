@@ -29,7 +29,7 @@
 #' to1 <- 0.2
 #' so1 <- 0.05
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.03)
-#' ssdBFs(level = 1/10, dprior = dprior, power = 0.6)
+#' ssdBFs(level = 1/10, dprior = dprior, power = 0.95)
 #'
 #' @export
 
@@ -83,7 +83,9 @@ ssdBFs <- function(level, dprior, power,
     ## create output object
     out <- list("designPrior" = dprior, "power" = power,
                 "powerRecomputed" = outPow, "sr" = sr,
-                "c" = dprior$so^2/sr^2)
+                "c" = dprior$so^2/sr^2,
+                type = paste("sceptical Bayes factor <=", signif(level, 3),
+                             "(numerical computation)"))
     class(out) <- "ssdRS"
     return(out)
 }

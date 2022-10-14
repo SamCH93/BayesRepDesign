@@ -82,7 +82,9 @@ ssdBFr <- function(level, dprior, power,
     ## create output object
     out <- list("designPrior" = dprior, "power" = power,
                 "powerRecomputed" = outPow, "sr" = sr,
-                "c" = dprior$so^2/sr^2)
+                "c" = dprior$so^2/sr^2,
+                type = paste("replication Bayes factor <=", signif(level, 3),
+                             "(numerical computation)"))
     class(out) <- "ssdRS"
     return(out)
 }

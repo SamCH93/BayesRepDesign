@@ -31,10 +31,10 @@
 #'
 #' @examples
 #' ## specify design prior
-#' to1 <- 4
+#' to1 <- 2
 #' so1 <- 1
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.25, sp = Inf)
-#' ssdMeta(level = 0.025^2, dprior = dprior, power = 0.8)
+#' ssdMeta(level = 0.025^2, dprior = dprior, power = 0.95)
 #'
 #' @export
 
@@ -90,7 +90,9 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 10)) {
     ## create output object
     out <- list("designPrior" = dprior, "power" = power,
                 "powerRecomputed" = outPow, "sr" = sr,
-                "c" = dprior$so^2/sr^2)
+                "c" = dprior$so^2/sr^2,
+                type = paste("meta-analytic p-value <=", signif(level, 3),
+                             "(numerical computation)"))
     class(out) <- "ssdRS"
     return(out)
 }

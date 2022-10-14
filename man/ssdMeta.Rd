@@ -33,10 +33,10 @@ The probability of replication success .....
 }
 \examples{
 ## specify design prior
-to1 <- 4
+to1 <- 2
 so1 <- 1
 dprior <- designPrior(to = to1, so = so1, tau = 0.25, sp = Inf)
-ssdMeta(level = 0.025^2, dprior = dprior, power = 0.8)
+ssdMeta(level = 0.025^2, dprior = dprior, power = 0.95)
 
 }
 \references{

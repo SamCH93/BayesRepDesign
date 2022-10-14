@@ -40,7 +40,28 @@ successRegion <- function(intervals) {
             }
         }
     }
-
     class(intervalsSorted) <- "successRegion"
     return(intervalsSorted)
+}
+
+#' Print method for successRegion object
+#' @method print successRegion
+#' @param x A successRegion object
+#' @param ... Other arguments
+#' @examples
+#' ## success region for two-sided significance test
+#' successRegion(intervals = rbind(c(1.96, Inf), c(-Inf, -1.96)))
+#' ## success region for one-sided significance test
+#' successRegion(intervals = rbind(c(1.96, Inf)))
+#' @export
+print.successRegion <- function(x, ...) {
+    parensMat <- matrix(nrow = nrow(x), ncol = ncol(x))
+    parensMat[,1] <- ifelse(is.finite(x[,1]), "[", "(")
+    parensMat[,2] <- ifelse(is.finite(x[,2]), "]", ")")
+    intChar <- rev(paste0(paste0(parensMat[,1], x[,1], ", "),
+                          paste0(x[,2], parensMat[,2])))
+    cat("Success region for replication effect estimate\n")
+    cat(paste0("  ", intChar), sep = "  and")
+    cat("\n")
+    invisible(x)
 }
