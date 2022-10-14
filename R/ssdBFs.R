@@ -29,7 +29,7 @@
 #' to1 <- 0.2
 #' so1 <- 0.05
 #' dprior <- designPrior(to = to1, so = so1, tau = 0.03)
-#' ssdBFs(level = 1/10, dprior = dprior, power = 0.95)
+#' ssdBFs(level = 1/10, dprior = dprior, power = 0.9)
 #'
 #' @export
 
