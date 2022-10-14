@@ -9,8 +9,8 @@ statistical framework underlying the package.
 
 ```r
 ## dependency which is not on CRAN
-remotes::install_gitlab(repo = "samuel.pawel/BayesRep", 
-                        subdir = "pkg", host = "gitlab.uzh.ch")
+remotes::install_gitlab(repo = "samuel.pawel/BayesRep", subdir = "pkg", 
+                        host = "gitlab.uzh.ch")
 
 remotes::install_github(repo = "SamCH93/BayesRepDesign")
 ```
