@@ -141,8 +141,10 @@ porsBFs <- function(level, dprior, sr) {
         so <- dprior$so
         to <- dprior$to
         zo <- to/so
-        s <- BayesRep::vss(x = zo, gamma = level) # relative prior variance
-        if (is.nan(s)) {
+        q <- lamW::lambertWm1(x = -zo^2/level^2*exp(-zo^2))
+        s <- -zo^2/q - 1
+        ## s <- BayesRep::vss(x = zo, gamma = level) # relative prior variance
+        if (is.nan(s) | s < 0) {
             p <- 0
         } else {
             c <- so^2/sr1^2

@@ -8,10 +8,6 @@ statistical framework underlying the package.
 ## Installation
 
 ```r
-## dependency which is not on CRAN
-remotes::install_gitlab(repo = "samuel.pawel/BayesRep", subdir = "pkg", 
-                        host = "gitlab.uzh.ch")
-
 remotes::install_github(repo = "SamCH93/BayesRepDesign")
 ```
 
@@ -52,7 +48,7 @@ ssdSig(level = 0.025, dprior = dp, power = 0.8)
 #> probability of replication success
 #> ------------------------------------------------------------------------
 #>   PoRS = 0.8 : specified
-#>  PoRS = 0.8 : recomputed with sr
+#>   PoRS = 0.8 : recomputed with sr
 #> 
 #> required sample size
 #> ------------------------------------------------------------------------
