@@ -4,10 +4,6 @@
 #'     replication success with a certain probability and based on a certain
 #'     type of success region.
 #'
-#' @details The probability of replication success .....
-#'
-#' @md
-#'
 #' @param sregionfun Function that returns the success region for replication
 #'     effect estimate as a function of the replication standard error
 #' @param dprior Design prior object

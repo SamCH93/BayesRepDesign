@@ -5,10 +5,6 @@
 #'     replication success with a certain probability and based on statistical
 #'     significance of the replication effect estimate.
 #'
-#' @details The probability of replication success .....
-#'
-#' @md
-#'
 #' @param level Significance level (one-sided) for the replication effect
 #'     estimate
 #' @param dprior Design prior object

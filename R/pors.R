@@ -6,7 +6,6 @@
 #'     is larger than one, the supplied success region needs to be formulated in
 #'     terms of the average replication effect estimate.
 #'
-#'
 #' @param sregion Success region for replication effect estimate
 #' @param dprior Design prior object
 #' @param sr Standard error of replication effect estimate

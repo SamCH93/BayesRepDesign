@@ -21,6 +21,14 @@
 #' designing replication studies. arXiv preprint.
 #' \doi{10.48550/arXiv.XXXX.XXXXX}
 #'
+#' Verhagen, J. and Wagenmakers, E. J. (2014). Bayesian tests to quantify the result
+#' of a replication attempt. Journal of Experimental Psychology: General,
+#' 145:1457-1475. \doi{10.1037/a0036731}
+#'
+#' Ly, A., Etz, A., Marsman, M., & Wagenmakers, E.-J. (2018). Replication Bayes
+#' factors from evidence updating. Behavior Research Methods, 51(6), 2498-2508.
+#' \doi{10.3758/s13428-018-1092-x}
+#'
 #' @author Samuel Pawel
 #'
 #' @examples

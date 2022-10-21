@@ -40,6 +40,10 @@ ssdBFs(level = 1/10, dprior = dprior, power = 0.9)
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.XXXX.XXXXX}
+
+Pawel, S. and Held, L. (2020). The sceptical Bayes factor for the assessement
+of replication success. Journal of the Royal Statistical Society: Series B
+(Statistical Methodology), 84(3), 879-911. \doi{10.1111/rssb.12491}
 }
 \author{
 Samuel Pawel

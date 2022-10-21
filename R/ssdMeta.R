@@ -5,17 +5,12 @@
 #'     replication success with a certain probability and based on statistical
 #'     significance of the fixed-effects meta-analytic effect estimate.
 #'
-#' @details The probability of replication success .....
-#'
-#' @md
-#'
 #' @param level Significance level (one-sided) for the replication effect
 #'     estimate
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #' @param searchInt Interval for numerical search over replication standard
 #'     errors
-#'
 #'
 #' @return An ssdRS object containing the design prior, the recomputed power,
 #'     the required replication standard error sr, and the relative sample size

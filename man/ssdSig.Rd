@@ -3,7 +3,7 @@
 \name{ssdSig}
 \alias{ssdSig}
 \title{Sample size determination for replication success based on
-significance}
+    significance}
 \usage{
 ssdSig(level, dprior, power)
 }
@@ -17,16 +17,13 @@ estimate}
 }
 \value{
 An ssdRS object containing the design prior, the recomputed power,
-the required replication standard error sr, and the relative sample size
-c = so^2/sr^2 = nr/no
+    the required replication standard error sr, and the relative sample size
+    c = so^2/sr^2 = nr/no
 }
 \description{
 This function computes the standard error required to achieve
-replication success with a certain probability and based on statistical
-significance of the replication effect estimate.
-}
-\details{
-The probability of replication success .....
+    replication success with a certain probability and based on statistical
+    significance of the replication effect estimate.
 }
 \examples{
 ## specify design prior

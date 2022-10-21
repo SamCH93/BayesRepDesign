@@ -3,7 +3,7 @@
 \name{ssdEqu}
 \alias{ssdEqu}
 \title{Sample size determination for replication success based on
-effect size equivalence}
+    effect size equivalence}
 \usage{
 ssdEqu(level, dprior, power, margin, searchInt = c(0, 2))
 }
@@ -23,16 +23,13 @@ errors}
 }
 \value{
 An ssdRS object containing the design prior, the recomputed power,
-the required replication standard error sr, and the relative sample size
-c = so^2/sr^2 = nr/no
+    the required replication standard error sr, and the relative sample size
+    c = so^2/sr^2 = nr/no
 }
 \description{
 This function computes the standard error required to achieve
-replication success with a certain probability and based on effect size
-equivalence of original and replication effect size
-}
-\details{
-The probability of replication success .....
+    replication success with a certain probability and based on effect size
+    equivalence of original and replication effect size
 }
 \examples{
 ## specify design prior
@@ -46,6 +43,10 @@ ssdEqu(level = 0.1, dprior = dprior, power = 0.8, margin = 0.2)
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.XXXX.XXXXX}
+
+Anderson, S. F. and Maxwell, S. E. (2016). There's more than one way to
+conduct a replication study: Beyond statistical significance. Psychological
+Methods, 21(1), 1-12. \doi{10.1037/met0000051}
 }
 \author{
 Samuel Pawel

@@ -3,7 +3,7 @@
 \name{ssdMeta}
 \alias{ssdMeta}
 \title{Sample size determination for replication success based on
-meta-analytic significance}
+    meta-analytic significance}
 \usage{
 ssdMeta(level, dprior, power, searchInt = c(0, 10))
 }
@@ -20,16 +20,13 @@ errors}
 }
 \value{
 An ssdRS object containing the design prior, the recomputed power,
-the required replication standard error sr, and the relative sample size
-c = so^2/sr^2 = nr/no
+    the required replication standard error sr, and the relative sample size
+    c = so^2/sr^2 = nr/no
 }
 \description{
 This function computes the standard error required to achieve
-replication success with a certain probability and based on statistical
-significance of the fixed-effects meta-analytic effect estimate.
-}
-\details{
-The probability of replication success .....
+    replication success with a certain probability and based on statistical
+    significance of the fixed-effects meta-analytic effect estimate.
 }
 \examples{
 ## specify design prior
