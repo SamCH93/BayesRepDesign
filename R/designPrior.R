@@ -10,8 +10,8 @@
 #'     is infinity (an improper uniform prior).
 #' @param tau The prior heterogeneity standard deviation \eqn{\tau}{tau}. The
 #'     default is zero (no heterogeneity).
-#' @param g The relative prior variance \eqn{g = (\sigma_{\theta}^2 +
-#'     \tau^2)/\sigma_o^2}{g = (sp^2 + tau^2)/so^2} (alternative parametrization
+#' @param g The relative prior variance \eqn{g = \sigma_{\theta}^2/(
+#'     \tau^2 + \sigma_o^2)}{g = sp^2/(tau^2 + so^2)} (alternative parametrization
 #'     of prior standard deviation \eqn{\sigma_{\theta}}{sp})
 #' @param h The relative prior heterogeneity variance \eqn{h =
 #'     \tau^2/\sigma_o^2}{h = tau^2/so^2} (alternative parametrization of prior
@@ -36,7 +36,7 @@
 #' designPrior(to = 1.1, so = 1)
 #' @export
 designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
-                        g = (sp^2 + tau^2)/so^2, h = tau^2/so^2,
+                        g = sp^2/(tau^2 + so^2), h = tau^2/so^2,
                         type = c(NA, "conditional", "predictive", "EB", "simple")) {
 
 
@@ -79,27 +79,29 @@ designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
     )
     type <- match.arg(type)
 
-    ## compute absolute parameters based on relative ones
-    sp <- sqrt(g)*so
+    ## recompute absolute parameters based on relative ones
     tau <- sqrt(h)*so
+    sp <- sqrt(g*(so^2 + tau^2))
 
     ## shortcuts
     if (!is.na(type)) {
         if (type == "conditional") {
-            so <- 0
+            mu <- to
             tau <- 0
-            sp <- Inf
-            g <- Inf
+            sp <- 0
+
         }
         if (type == "predictive") {
-            g <- Inf
+            sp <- Inf
         }
         if (type == "EB") {
-            g <- pmax((to - mu)^2 - so^2 - tau^2, 0)
+            sp <- sqrt(pmax((to - mu)^2 - so^2 - tau^2, 0))
+            g <- sp^2/(so^2 + tau^2)
         }
         if (type == "simple") {
-            g <- 0
+            sp <- 0
         }
+        g <- sp^2/(so^2 + tau^2)
     }
 
     ## compute mean and variance of design prior by standard Bayesian updating

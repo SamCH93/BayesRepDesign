@@ -5,7 +5,13 @@
 \title{Sample size determination for replication success based on
     replication Bayes factor}
 \usage{
-ssdBFr(level, dprior, power, searchInt = c(.Machine$double.eps^0.5, 2))
+ssdBFr(
+  level,
+  dprior,
+  power,
+  searchInt = c(.Machine$double.eps^0.5, 2),
+  paradox = TRUE
+)
 }
 \arguments{
 \item{level}{Bayes factor level below which replication success is achieved}
@@ -16,6 +22,11 @@ ssdBFr(level, dprior, power, searchInt = c(.Machine$double.eps^0.5, 2))
 
 \item{searchInt}{Interval for numerical search over replication standard
 errors}
+
+\item{paradox}{Should the probability of replication success be computed
+allowing for the replication paradox (replication success when the effect
+estimates from original and replication study have a different sign)?
+Defaults to TRUE.}
 }
 \value{
 An ssdRS object containing the design prior, the recomputed power,

@@ -11,6 +11,10 @@
 #' @param power Desired probability of replication success
 #' @param searchInt Interval for numerical search over replication standard
 #'     errors
+#' @param paradox Should the probability of replication success be computed
+#'     allowing for the replication paradox (replication success when the effect
+#'     estimates from original and replication study have a different sign)?
+#'     Defaults to TRUE.
 #'
 #' @return An ssdRS object containing the design prior, the recomputed power,
 #'     the required replication standard error sr, and the relative sample size
@@ -38,7 +42,8 @@
 #' @export
 
 ssdBFs <- function(level, dprior, power,
-                   searchInt = c(.Machine$double.eps^0.5, 2)) {
+                   searchInt = c(.Machine$double.eps^0.5, 2),
+                   paradox = TRUE) {
     ## input checks
     stopifnot(
         length(level) == 1,
@@ -57,11 +62,16 @@ ssdBFs <- function(level, dprior, power,
         length(searchInt) == 2,
         is.numeric(searchInt),
         all(is.finite(searchInt)),
-        0 <= searchInt[1], searchInt[1] < searchInt[2]
+        0 <= searchInt[1], searchInt[1] < searchInt[2],
+
+        length(paradox) == 1,
+        is.logical(paradox),
+        !is.na(paradox)
     )
 
     ## computing bound of probability of replication success
-    limP <- porsBFs(level = level, dprior = dprior, sr = .Machine$double.eps^0.5)
+    limP <- porsBFs(level = level, dprior = dprior, sr = .Machine$double.eps^0.5,
+                    paradox = paradox)
     if (power > limP) {
         warning(paste0("Power not achievable with specified design prior (at most ",
                        round(limP, 3), ")"))
@@ -70,7 +80,8 @@ ssdBFs <- function(level, dprior, power,
     } else {
        ## computing replication standard error sr
         rootFun <- function(sr) {
-            porsBFs(level = level, dprior = dprior, sr = sr) - power
+            porsBFs(level = level, dprior = dprior, sr = sr,
+                    paradox = paradox) - power
         }
         res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root)
         if (inherits(res, "try-error")) {
@@ -80,7 +91,8 @@ ssdBFs <- function(level, dprior, power,
         } else {
             sr <- res
             ## computing probability of replication success
-            outPow <- porsBFs(level = level, dprior = dprior, sr = sr)
+            outPow <- porsBFs(level = level, dprior = dprior, sr = sr,
+                              paradox = paradox)
         }
     }
 
@@ -104,6 +116,10 @@ ssdBFs <- function(level, dprior, power,
 #'     success is achieved
 #' @param dprior Design prior object
 #' @param sr Replication standard error
+#' @param paradox Should the probability of replication success be computed
+#'     allowing for the replication paradox (replication success when the effect
+#'     estimates from original and replication study have a different sign)?
+#'     Defaults to TRUE.
 #'
 #' @return The probability to achieve replication success
 #'
@@ -112,6 +128,10 @@ ssdBFs <- function(level, dprior, power,
 #' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 #' designing replication studies. arXiv preprint.
 #' \doi{10.48550/arXiv.XXXX.XXXXX}
+#'
+#' Pawel, S. and Held, L. (2020). The sceptical Bayes factor for the assessement
+#' of replication success. Journal of the Royal Statistical Society: Series B
+#' (Statistical Methodology), 84(3), 879-911. \doi{10.1111/rssb.12491}
 #'
 #' @author Samuel Pawel
 #'
@@ -124,7 +144,7 @@ ssdBFs <- function(level, dprior, power,
 #'
 #' @export
 
-porsBFs <- function(level, dprior, sr) {
+porsBFs <- function(level, dprior, sr, paradox = TRUE) {
     ## input checks
     stopifnot(
         length(level) == 1,
@@ -147,7 +167,6 @@ porsBFs <- function(level, dprior, sr) {
         zo <- to/so
         q <- lamW::lambertWm1(x = -zo^2/level^2*exp(-zo^2))
         s <- -zo^2/q - 1
-        ## s <- BayesRep::vss(x = zo, gamma = level) # relative prior variance
         if (is.nan(s) | s < 0) {
             p <- 0
         } else {
@@ -156,8 +175,17 @@ porsBFs <- function(level, dprior, sr) {
                   zo^2/(1 - s))*(1/c + s)*(sr1^2 + so^2)/(1 - s)
             M <- to*(1/c + s)/(1 - s)
             if (s < 1) {
-                ints <- rbind(c(-Inf, -sqrt(A) - M),
-                    c(sqrt(A) - M, Inf))
+                intsBothsides <- rbind(c(-Inf, -sqrt(A) - M), c(sqrt(A) - M, Inf))
+                ## replication paradox can occur in this situation
+                if (paradox) {
+                    ints <- intsBothsides
+                } else {
+                    if (sign(to) > 0) {
+                        ints <- intsBothsides[2,,drop = FALSE]
+                    } else {
+                        ints <- intsBothsides[1,,drop = FALSE]
+                    }
+                }
             } else if (isTRUE(all.equal(s, 1, tolerance = 0.0001))) {
                 X <- 2*log(level)*(so^2 + sr^2)/to
                 if (sign(to) > 0) {

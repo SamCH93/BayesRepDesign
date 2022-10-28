@@ -4,7 +4,7 @@
 \alias{porsBFs}
 \title{Probability of replication success based on the sceptical Bayes factor}
 \usage{
-porsBFs(level, dprior, sr)
+porsBFs(level, dprior, sr, paradox = TRUE)
 }
 \arguments{
 \item{level}{Threshold for the sceptical Bayes factor below which replication
@@ -13,6 +13,11 @@ success is achieved}
 \item{dprior}{Design prior object}
 
 \item{sr}{Replication standard error}
+
+\item{paradox}{Should the probability of replication success be computed
+allowing for the replication paradox (replication success when the effect
+estimates from original and replication study have a different sign)?
+Defaults to TRUE.}
 }
 \value{
 The probability to achieve replication success
@@ -33,6 +38,10 @@ porsBFs(level = 1/38.7, dprior = dprior, sr = 0.05)
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.XXXX.XXXXX}
+
+Pawel, S. and Held, L. (2020). The sceptical Bayes factor for the assessement
+of replication success. Journal of the Royal Statistical Society: Series B
+(Statistical Methodology), 84(3), 879-911. \doi{10.1111/rssb.12491}
 }
 \author{
 Samuel Pawel

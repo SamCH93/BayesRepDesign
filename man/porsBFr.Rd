@@ -4,7 +4,7 @@
 \alias{porsBFr}
 \title{Probability of replication success based on replication Bayes factor}
 \usage{
-porsBFr(level, dprior, sr)
+porsBFr(level, dprior, sr, paradox = TRUE)
 }
 \arguments{
 \item{level}{Bayes factor level below which replication success is achieved}
@@ -12,6 +12,11 @@ porsBFr(level, dprior, sr)
 \item{dprior}{Design prior object}
 
 \item{sr}{Replication standard error}
+
+\item{paradox}{Should the probability of replication success be computed
+allowing for the replication paradox (replication success when the effect
+estimates from original and replication study have a different sign)?
+Defaults to TRUE.}
 }
 \value{
 The probability to achieve replication success
@@ -32,6 +37,14 @@ porsBFr(level = 1/10, dprior = dprior, sr = c(0.05, 0.04))
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.XXXX.XXXXX}
+
+Verhagen, J. and Wagenmakers, E. J. (2014). Bayesian tests to quantify the result
+of a replication attempt. Journal of Experimental Psychology: General,
+145:1457-1475. \doi{10.1037/a0036731}
+
+Ly, A., Etz, A., Marsman, M., & Wagenmakers, E.-J. (2018). Replication Bayes
+factors from evidence updating. Behavior Research Methods, 51(6), 2498-2508.
+\doi{10.3758/s13428-018-1092-x}
 }
 \author{
 Samuel Pawel

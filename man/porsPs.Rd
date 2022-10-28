@@ -33,6 +33,10 @@ porsPs(level = 0.025, dprior = dprior, sr = c(0.05, 0.01))
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.XXXX.XXXXX}
+
+Held, L. (2020). A new standard for the analysis and design of replication
+studies (with discussion). Journal of the Royal Statistical Society: Series A
+(Statistics in Society), 183(2), 431-448. \doi{10.1111/rssa.12493}
 }
 \author{
 Samuel Pawel

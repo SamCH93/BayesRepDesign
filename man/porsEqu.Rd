@@ -36,6 +36,10 @@ porsEqu(level = 0.1, dprior = dprior, margin = 0.3, sr = c(0.05, 0.03))
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.XXXX.XXXXX}
+
+Anderson, S. F. and Maxwell, S. E. (2016). There's more than one way to
+conduct a replication study: Beyond statistical significance. Psychological
+Methods, 21(1), 1-12. \doi{10.1037/met0000051}
 }
 \author{
 Samuel Pawel

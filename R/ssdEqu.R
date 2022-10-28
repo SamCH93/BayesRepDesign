@@ -134,6 +134,10 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
 #' designing replication studies. arXiv preprint.
 #' \doi{10.48550/arXiv.XXXX.XXXXX}
 #'
+#' Anderson, S. F. and Maxwell, S. E. (2016). There's more than one way to
+#' conduct a replication study: Beyond statistical significance. Psychological
+#' Methods, 21(1), 1-12. \doi{10.1037/met0000051}
+#'
 #' @author Samuel Pawel
 #'
 #' @examples
