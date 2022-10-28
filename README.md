@@ -8,6 +8,7 @@ statistical framework underlying the package.
 ## Installation
 
 ```r
+## install.packages("remotes") # run if remotes package not installed
 remotes::install_github(repo = "SamCH93/BayesRepDesign")
 ```
 
