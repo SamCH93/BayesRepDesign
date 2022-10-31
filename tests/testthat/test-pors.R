@@ -51,7 +51,7 @@ resultsDF <- do.call("rbind", lapply(X = seq(1, nrow(testGrid)), FUN = function(
 }))
 
 ## porsDF <- resultsDF
-## save(object = porsDF, file = "porsDF.rda")
+## save(object = porsDF, file = "porsDF.rda",  version = 2)
 
 
 load("porsDF.rda")
