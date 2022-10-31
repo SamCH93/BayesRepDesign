@@ -36,8 +36,9 @@ An ssdRS object containing the design prior, the recomputed power,
 }
 \description{
 This function computes the standard error required to achieve
-    replication success with a certain probability and based on the
-    Bayes factor
+    replication success with a certain probability and based on the sceptical
+    Bayes factor. The sceptical Bayes factor is assumed to be oriented so
+    that values below one indicate replication success.
 }
 \examples{
 ## specify design prior

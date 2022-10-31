@@ -14,7 +14,7 @@ pors(sregion, dprior, sr, nsites = 1)
 \item{sr}{Standard error of replication effect estimate}
 
 \item{nsites}{Number of sites, defaults to 1. The sites are assumed to have
-the same standard error sr.}
+the same standard error sr}
 }
 \value{
 The probability of replication success

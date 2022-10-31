@@ -3,7 +3,10 @@
 #'
 #' @description This function computes the standard error required to achieve
 #'     replication success with a certain probability and based on the
-#'     replication Bayes factor under normality
+#'     replication Bayes factor under normality. The replication Bayes factor is
+#'     assumed to be oriented so that values below one indicate replication
+#'     success, whereas values above one indicate evidence for the null
+#'     hypothesis.
 #'
 #' @param level Bayes factor level below which replication success is achieved
 #' @param dprior Design prior object
@@ -14,7 +17,6 @@
 #'     allowing for the replication paradox (replication success when the effect
 #'     estimates from original and replication study have a different sign)?
 #'     Defaults to TRUE.
-#'
 #'
 #' @return An ssdRS object containing the design prior, the recomputed power,
 #'     the required replication standard error sr, and the relative sample size

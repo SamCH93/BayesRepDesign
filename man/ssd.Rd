@@ -34,9 +34,9 @@ An ssdRS object containing the design prior, the recomputed power,
     c = so^2/sr^2 = nr/no
 }
 \description{
-This function computes the standard error required to achieve
-    replication success with a certain probability and based on a certain
-    type of success region.
+This function computes the standard error of the replication
+    effect estiamte required to achieve replication success with a certain
+    probability and based on a certain type of success region.
 }
 \examples{
 ## specify design prior

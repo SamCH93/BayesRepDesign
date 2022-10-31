@@ -1,8 +1,8 @@
 #' @title Sample size determination for replication success
 #'
-#' @description This function computes the standard error required to achieve
-#'     replication success with a certain probability and based on a certain
-#'     type of success region.
+#' @description This function computes the standard error of the replication
+#'     effect estiamte required to achieve replication success with a certain
+#'     probability and based on a certain type of success region.
 #'
 #' @param sregionfun Function that returns the success region for replication
 #'     effect estimate as a function of the replication standard error

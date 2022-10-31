@@ -10,15 +10,21 @@
 #'     is infinity (an improper uniform prior).
 #' @param tau The prior heterogeneity standard deviation \eqn{\tau}{tau}. The
 #'     default is zero (no heterogeneity).
-#' @param g The relative prior variance \eqn{g = \sigma_{\theta}^2/(
-#'     \tau^2 + \sigma_o^2)}{g = sp^2/(tau^2 + so^2)} (alternative parametrization
-#'     of prior standard deviation \eqn{\sigma_{\theta}}{sp})
+#' @param g The relative prior variance \eqn{g = \sigma_{\theta}^2/( \tau^2 +
+#'     \sigma_o^2)}{g = sp^2/(tau^2 + so^2)} (alternative parametrization of
+#'     prior standard deviation \eqn{\sigma_{\theta}}{sp})
 #' @param h The relative prior heterogeneity variance \eqn{h =
 #'     \tau^2/\sigma_o^2}{h = tau^2/so^2} (alternative parametrization of prior
 #'     heterogeneity standard deviation \eqn{\tau}{tau})
 #' @param type Shortcut for special parameter combinations. The available
-#'     options are NA, "conditional", "predictive", "EB", and "simple" (see
-#'     below for details). Defaults to NA.
+#'     options are NA, "conditional", "predictive", and "EB" (see below for
+#'     details). Defaults to NA.
+#'
+#' @details The "conditional" design prior corresponds to a point mass at the
+#'     original effect estimate. The "predictive" design prior is obtained from
+#'     updating a uniform initial prior by the likelihood of the original data.
+#'     The "EB" design prior is obtained by empirical Bayes estimation of the
+#'     variance of a zero-mean normal prior.
 #'
 #' @return A designPrior object
 #'
@@ -37,7 +43,7 @@
 #' @export
 designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
                         g = sp^2/(tau^2 + so^2), h = tau^2/so^2,
-                        type = c(NA, "conditional", "predictive", "EB", "simple")) {
+                        type = c(NA, "conditional", "predictive", "EB")) {
 
 
     ## input checks
@@ -62,7 +68,7 @@ designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
 
         length(tau) == 1,
         is.numeric(tau),
-        is.finite(tau),
+        ## is.finite(tau),
         0 <= tau,
 
         length(g) == 1,
@@ -97,9 +103,6 @@ designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
         if (type == "EB") {
             sp <- sqrt(pmax((to - mu)^2 - so^2 - tau^2, 0))
             g <- sp^2/(so^2 + tau^2)
-        }
-        if (type == "simple") {
-            sp <- 0
         }
         g <- sp^2/(so^2 + tau^2)
     }

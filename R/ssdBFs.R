@@ -2,8 +2,9 @@
 #'     the sceptical Bayes factor
 #'
 #' @description This function computes the standard error required to achieve
-#'     replication success with a certain probability and based on the
-#'     Bayes factor
+#'     replication success with a certain probability and based on the sceptical
+#'     Bayes factor. The sceptical Bayes factor is assumed to be oriented so
+#'     that values below one indicate replication success.
 #'
 #' @param level Threshold for the sceptical Bayes factor below which
 #'     replication success is achieved

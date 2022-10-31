@@ -2,11 +2,12 @@
 #'     dual criterion
 #'
 #' @description This function computes the standard error required to achieve
-#'     replication success with a certain probability and based on statistical
-#'     significance of the replication effect estimate.
+#'     replication success with a certain probability and based on the dual
+#'     criterion (significance and relevance).
 #'
 #' @param level Significance level (one-sided) for the replication effect
 #'     estimate
+#' @param relevance Minimally relevant effect size
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #'
@@ -31,7 +32,7 @@
 #'
 #' @export
 
-ssdDual <- function(level, dprior, power) {
+ssdDual <- function(level, relevance, dprior, power) {
     ## ## input checks
     ## stopifnot(
     ##     length(level) == 1,
@@ -93,11 +94,12 @@ ssdDual <- function(level, dprior, power) {
 #' @title Probability of replication success based on dual criterion
 #'
 #' @description This function computes the probability to achieve replication
-#'     success on statistical significance of the replication effect estimate.
+#'     success based on the dual criterion (significance and relevance).
 #'
 #' @param level Significance level for p-value of the replication effect
 #'     estimate (one-sided in the same direction as the original effect
 #'     estimate)
+#' @param relevance Minimally relevant effect size
 #' @param dprior Design prior object
 #' @param sr Replication standard error
 #'
@@ -120,7 +122,7 @@ ssdDual <- function(level, dprior, power) {
 #'
 #' @export
 
-porsDual <- function(level, dprior, sr) {
+porsDual <- function(level, relevance, dprior, sr) {
     ## ## input checks
     ## stopifnot(
     ##     length(level) == 1,

@@ -12,7 +12,7 @@ designPrior(
   tau = 0,
   g = sp^2/(tau^2 + so^2),
   h = tau^2/so^2,
-  type = c(NA, "conditional", "predictive", "EB", "simple")
+  type = c(NA, "conditional", "predictive", "EB")
 )
 }
 \arguments{
@@ -29,23 +29,30 @@ is infinity (an improper uniform prior).}
 \item{tau}{The prior heterogeneity standard deviation \eqn{\tau}{tau}. The
 default is zero (no heterogeneity).}
 
-\item{g}{The relative prior variance \eqn{g = \sigma_{\theta}^2/(
-\tau^2 + \sigma_o^2)}{g = sp^2/(tau^2 + so^2)} (alternative parametrization
-of prior standard deviation \eqn{\sigma_{\theta}}{sp})}
+\item{g}{The relative prior variance \eqn{g = \sigma_{\theta}^2/( \tau^2 +
+\sigma_o^2)}{g = sp^2/(tau^2 + so^2)} (alternative parametrization of
+prior standard deviation \eqn{\sigma_{\theta}}{sp})}
 
 \item{h}{The relative prior heterogeneity variance \eqn{h =
 \tau^2/\sigma_o^2}{h = tau^2/so^2} (alternative parametrization of prior
 heterogeneity standard deviation \eqn{\tau}{tau})}
 
 \item{type}{Shortcut for special parameter combinations. The available
-options are NA, "conditional", "predictive", "EB", and "simple" (see
-below for details). Defaults to NA.}
+options are NA, "conditional", "predictive", and "EB" (see below for
+details). Defaults to NA.}
 }
 \value{
 A designPrior object
 }
 \description{
 Creates a design prior object.
+}
+\details{
+The "conditional" design prior corresponds to a point mass at the
+    original effect estimate. The "predictive" design prior is obtained from
+    updating a uniform initial prior by the likelihood of the original data.
+    The "EB" design prior is obtained by empirical Bayes estimation of the
+    variance of a zero-mean normal prior.
 }
 \examples{
 designPrior(to = 1.1, so = 1)

@@ -10,7 +10,7 @@
 #' @param dprior Design prior object
 #' @param sr Standard error of replication effect estimate
 #' @param nsites Number of sites, defaults to 1. The sites are assumed to have
-#'     the same standard error sr.
+#'     the same standard error sr
 #'
 #' @return The probability of replication success
 #'
