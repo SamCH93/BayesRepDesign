@@ -53,7 +53,6 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
         is.numeric(power),
         is.finite(power),
         0 < power, power < 1,
-        level < power,
 
         length(margin) == 1,
         is.numeric(margin),
