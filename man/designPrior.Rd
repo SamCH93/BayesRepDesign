@@ -60,7 +60,7 @@ designPrior(to = 1.1, so = 1)
 \references{
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
-\doi{10.48550/arXiv.XXXX.XXXXX}
+\doi{10.48550/arXiv.2211.02552}
 }
 \seealso{
 \code{\link{pors}}, \code{\link{ssd}}

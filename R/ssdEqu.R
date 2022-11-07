@@ -22,7 +22,7 @@
 #'
 #' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 #' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.XXXX.XXXXX}
+#' \doi{10.48550/arXiv.2211.02552}
 #'
 #' Anderson, S. F. and Maxwell, S. E. (2016). There's more than one way to
 #' conduct a replication study: Beyond statistical significance. Psychological
@@ -131,7 +131,7 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
 #'
 #' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 #' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.XXXX.XXXXX}
+#' \doi{10.48550/arXiv.2211.02552}
 #'
 #' Anderson, S. F. and Maxwell, S. E. (2016). There's more than one way to
 #' conduct a replication study: Beyond statistical significance. Psychological

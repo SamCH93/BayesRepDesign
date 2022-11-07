@@ -25,7 +25,7 @@
 #'
 #' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 #' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.XXXX.XXXXX}
+#' \doi{10.48550/arXiv.2211.02552}
 #'
 #' Pawel, S. and Held, L. (2020). The sceptical Bayes factor for the assessement
 #' of replication success. Journal of the Royal Statistical Society: Series B
@@ -128,7 +128,7 @@ ssdBFs <- function(level, dprior, power,
 #'
 #' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 #' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.XXXX.XXXXX}
+#' \doi{10.48550/arXiv.2211.02552}
 #'
 #' Pawel, S. and Held, L. (2020). The sceptical Bayes factor for the assessement
 #' of replication success. Journal of the Royal Statistical Society: Series B

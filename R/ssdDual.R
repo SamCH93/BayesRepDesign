@@ -19,7 +19,10 @@
 #'
 #' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 #' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.XXXX.XXXXX}
+#' \doi{10.48550/arXiv.2211.02552}
+#'
+#' Rosenkranz, G. (2021). Replicability of studies following a dual-criterion
+#' design. Statistics in Medicine, 40(18), 4068-4076. \doi{10.1002/sim.9014}
 #'
 #' @author Samuel Pawel
 #'
@@ -168,7 +171,7 @@ porsDual <- function(level, relevance, dprior, sr) {
 #'
 #' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 #' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.XXXX.XXXXX}
+#' \doi{10.48550/arXiv.2211.02552}
 #'
 #' Rosenkranz, G. (2021). Replicability of studies following a dual-criterion
 #' design. Statistics in Medicine, 40(18), 4068-4076. \doi{10.1002/sim.9014}

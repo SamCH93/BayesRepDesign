@@ -2,7 +2,7 @@
 
 **BayesRepDesign** is an R package for Bayesian sample size calculation for
 replication studies. See the [arXiv
-preprint](https://doi.org/10.48550/arXiv.XXXX.XXXXX) for information on the
+preprint](https://doi.org/10.48550/arXiv.2211.02552) for information on the
 statistical framework underlying the package.
 
 ## Installation
@@ -96,4 +96,4 @@ ssd(sregionfun = sregFun, dprior = dp, power = 0.8)
 
 * Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches for designing
   replication studies.
-  [doi:10.48550/arXiv.XXXX.XXXXX](https://doi.org/10.48550/arXiv.XXXX.XXXXX)
+  [doi:10.48550/arXiv.2211.02552](https://doi.org/10.48550/arXiv.2211.02552)

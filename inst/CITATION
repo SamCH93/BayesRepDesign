@@ -6,7 +6,7 @@ citEntry(entry = "article",
          author = c(person(given = "Samuel", family = "Pawel", role = "aut"),
                     person(given = "Guido", family = "Consonni", role = "aut"),
                     person(given = "Leonhard", family = "Held", role = "aut")),
-         doi = "10.48550/arXiv.XXXX.XXXXX",
+         doi = "10.48550/arXiv.2211.02552",
          journal = "arXiv Preprint",
          volume = "",
          number = "",
@@ -14,5 +14,5 @@ citEntry(entry = "article",
          year = 2022,
          textVersion = paste("Pawel, S., Consonni, G., and Held, L. (2022).",
                              "Bayesian approaches to designing replication studies.",
-                             "https://doi.org/10.48550/arXiv.XXXX.XXXXX"
+                             "https://doi.org/10.48550/arXiv.2211.02552"
                              ))
