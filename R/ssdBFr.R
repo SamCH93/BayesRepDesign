@@ -89,7 +89,7 @@ ssdBFr <- function(level, dprior, power,
             porsBFr(level = level, dprior = dprior, sr = sr,
                     paradox = paradox) - power
         }
-        res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root)
+        res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root, silent = TRUE)
         if (inherits(res, "try-error")) {
             sr <- NaN
             outPow <- NaN

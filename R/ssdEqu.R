@@ -89,7 +89,7 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
                 porsEqu(level = level, dprior = dprior, margin = margin,
                         sr = sr) - power
             }
-            res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root)
+            res <- try(stats::uniroot(f = rootFun, interval = searchInt)$root, silent = TRUE)
             if (inherits(res, "try-error")) {
                 sr <- NaN
                 outPow <- NaN

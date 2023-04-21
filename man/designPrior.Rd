@@ -52,7 +52,7 @@ The "conditional" design prior corresponds to a point mass at the
     original effect estimate. The "predictive" design prior is obtained from
     updating a uniform initial prior by the likelihood of the original data.
     The "EB" design prior is obtained by empirical Bayes estimation of the
-    variance of a zero-mean normal prior.
+    variance of the normal prior.
 }
 \examples{
 designPrior(to = 1.1, so = 1)

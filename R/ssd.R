@@ -82,7 +82,7 @@ ssd <- function(sregionfun, dprior, power, nsites = 1,
                  nsites = nsites) - power
         }
         res <- try(stats::uniroot(f = rootFun, interval = log(searchInt),
-                                  ... = ...)$root)
+                                  ... = ...)$root, silent = TRUE)
         if (inherits(res, "try-error")) {
             sr <- NaN
             outPow <- NaN

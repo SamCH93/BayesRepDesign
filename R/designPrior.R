@@ -24,7 +24,7 @@
 #'     original effect estimate. The "predictive" design prior is obtained from
 #'     updating a uniform initial prior by the likelihood of the original data.
 #'     The "EB" design prior is obtained by empirical Bayes estimation of the
-#'     variance of a zero-mean normal prior.
+#'     variance of the normal prior.
 #'
 #' @return A designPrior object
 #'
@@ -95,7 +95,6 @@ designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
             mu <- to
             tau <- 0
             sp <- 0
-
         }
         if (type == "predictive") {
             sp <- Inf
