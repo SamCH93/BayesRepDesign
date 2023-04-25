@@ -10,9 +10,8 @@
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #'
-#' @return An ssdRS object containing the design prior, the recomputed power,
-#'     the required replication standard error sr, and the relative sample size
-#'     c = so^2/sr^2 = nr/no
+#' @return Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
+#'     details.
 #'
 #' @references
 #'
@@ -163,7 +162,8 @@ porsSig <- function(level, dprior, sr) {
 #'     effect estimate (one-sided in the same direction as the original effect
 #'     estimate)
 #'
-#' @return A successRegion object
+#' @return An object of class \code{"successRegion"}. See
+#'     \code{\link{successRegion}} for details.
 #'
 #' @references
 #'

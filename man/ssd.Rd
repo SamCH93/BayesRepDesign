@@ -29,9 +29,19 @@ have the same sample size.}
 \item{...}{other arguments for uniroot}
 }
 \value{
-An ssdRS object containing the design prior, the recomputed power,
-    the required replication standard error sr, and the relative sample size
-    c = so^2/sr^2 = nr/no
+Returns an object of class \code{"ssdRS"} which is a list containing:
+\tabular{ll}{
+   \code{designPrior} \tab The specified \code{"designPrior"} object. \cr
+   \tab \cr
+   \code{power} \tab The specified power. \cr
+   \tab \cr
+   \code{powerRecomputed} \tab The recomputed power. \cr
+   \tab \cr
+   \code{sr} \tab The required replication standard error \eqn{\sigma_r}{sr}. \cr
+   \tab \cr
+   \code{c} \tab The required relative sample size
+   \eqn{c = \sigma_o^2/\sigma_r^2 = n_r/n_o}{c = so^2/sr^2 =~ nr/no}. \cr
+}
 }
 \description{
 This function computes the standard error of the replication

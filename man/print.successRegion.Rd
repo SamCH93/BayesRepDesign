@@ -2,21 +2,28 @@
 % Please edit documentation in R/successRegion.R
 \name{print.successRegion}
 \alias{print.successRegion}
-\title{Print method for successRegion object}
+\title{Print method for class \code{"successRegion"}}
 \usage{
 \method{print}{successRegion}(x, ...)
 }
 \arguments{
-\item{x}{A successRegion object}
+\item{x}{Object of class \code{"successRegion"}}
 
 \item{...}{Other arguments}
 }
+\value{
+Prints text summary in the console and invisibly returns the
+    \code{"successRegion"} object
+}
 \description{
-Print method for successRegion object
+Print method for class \code{"successRegion"}
 }
 \examples{
 ## success region for two-sided significance test
 successRegion(intervals = rbind(c(1.96, Inf), c(-Inf, -1.96)))
 ## success region for one-sided significance test
 successRegion(intervals = rbind(c(1.96, Inf)))
+}
+\author{
+Samuel Pawel
 }

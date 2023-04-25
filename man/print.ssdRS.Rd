@@ -2,17 +2,21 @@
 % Please edit documentation in R/ssd.R
 \name{print.ssdRS}
 \alias{print.ssdRS}
-\title{Print method for ssdRS object}
+\title{Print method for class \code{"ssdRS"}}
 \usage{
 \method{print}{ssdRS}(x, ...)
 }
 \arguments{
-\item{x}{An ssdRS object}
+\item{x}{Object of class \code{"ssdRS"}}
 
 \item{...}{Other arguments}
 }
+\value{
+Prints text summary in the console and invisibly returns the
+    \code{"ssdRS"} object
+}
 \description{
-Print method for ssdRS object
+Print method for class \code{"ssdRS"}
 }
 \examples{
 ## specify design prior
@@ -26,4 +30,7 @@ sregionfunSig <- function(sr, alpha = 0.025) {
 }
 ssd1 <- ssd(sregionfun = sregionfunSig, dprior = dprior, power = 0.8)
 print(ssd1)
+}
+\author{
+Samuel Pawel
 }

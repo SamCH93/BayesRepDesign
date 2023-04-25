@@ -2,21 +2,27 @@
 % Please edit documentation in R/designPrior.R
 \name{density.designPrior}
 \alias{density.designPrior}
-\title{Density method for design prior object}
+\title{Density method for class \code{"designPrior"}}
 \usage{
 \method{density}{designPrior}(x, ...)
 }
 \arguments{
-\item{x}{A designPrior object}
+\item{x}{Object of class \code{"designPrior"}}
 
 \item{...}{Other arguments}
 }
+\value{
+Returns the density function of the design prior
+}
 \description{
-Density method for design prior object
+Density method for class \code{"designPrior"}
 }
 \examples{
 dp <- designPrior(to = 2.3123, so = 0.1, mu = 1.1, tau = 0.2)
 f <- density(dp)
-tseq <- seq(1, 3, 0.01)
+tseq <- seq(1, 3.5, 0.01)
 plot(tseq, f(theta = tseq), type = "l", xlab = "theta", ylab = "Design prior density")
+}
+\author{
+Samuel Pawel
 }

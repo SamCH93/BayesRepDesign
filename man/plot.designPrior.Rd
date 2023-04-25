@@ -2,20 +2,26 @@
 % Please edit documentation in R/designPrior.R
 \name{plot.designPrior}
 \alias{plot.designPrior}
-\title{Plot method for design prior object}
+\title{Plot method for class \code{"designPrior"}}
 \usage{
 \method{plot}{designPrior}(x, ...)
 }
 \arguments{
-\item{x}{A designPrior object}
+\item{x}{Object of class \code{"designPrior"}}
 
 \item{...}{Other arguments}
 }
+\value{
+Plots the density of the design prior
+}
 \description{
-Plot method for design prior object
+Plot method for class \code{"designPrior"}
 }
 \examples{
 dp <- designPrior(to = 2.3123, so = 0.1, mu = 1.1, tau = 0.2)
 plot(dp)
 plot(dp, xlim = c(0, 5), length.out = 500)
+}
+\author{
+Samuel Pawel
 }

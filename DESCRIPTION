@@ -1,15 +1,21 @@
 Package: BayesRepDesign
-Title: Bayesian Design of Replication Studies
 Version: 0.42
+Date: 2023-04-25
 Authors@R:
     person(given = "Samuel",
            family = "Pawel",
            role = c("aut", "cre"),
            email = "samuel.pawel@uzh.ch",
            comment = c(ORCID = "0000-0003-2779-320X"))
-Description: Provides functionality for determining the sample size of replication studies using Bayesian design analysis in the normal normal hierarchical model.
+Author: Samuel Pawel [aut, cre] (<https://orcid.org/0000-0003-2779-320X>)
+Maintainer: Samuel Pawel <samuel.pawel@uzh.ch>
+Title: Bayesian Design of Replication Studies
+Description: Provides functionality for determining the sample size of replication studies using Bayesian design analysis in the normal normal hierarchical model (Pawel et al., 2022) <doi:10.48550/arXiv.2211.02552>.
 License: GPL-3
 Encoding: UTF-8
 Imports: methods, lamW
 Suggests: roxygen2, testthat
 RoxygenNote: 7.2.3
+NeedsCompilation: no
+URL: https://github.com/SamCH93/BayesRepDesign
+BugReports: https://github.com/SamCH93/BayesRepDesign/issues

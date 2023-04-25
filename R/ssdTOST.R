@@ -13,9 +13,8 @@
 #' @param searchInt Interval for numerical search over replication standard
 #'     errors
 #'
-#' @return An ssdRS object containing the design prior, the recomputed power,
-#'     the required replication standard error sr, and the relative sample size
-#'     c = so^2/sr^2 = nr/no
+#' @return Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
+#'     details.
 #'
 #' @references
 #'

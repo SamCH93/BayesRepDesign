@@ -33,7 +33,7 @@ check: $(TAR)
 	R -e 'devtools::check_built(path = "out/$(TAR)", cran = FALSE)'
 
 cran: $(TAR)
-	R -e 'devtools::check_built(path = "out/$(TAR)", cran = TRUE, remote = TRUE)'
+	R -e 'devtools::check_built(path = "out/$(TAR)", cran = TRUE, remote = TRUE, force_suggests = TRUE, run_dont_test = TRUE)'
 
 test:
 	R -e 'devtools::test()'

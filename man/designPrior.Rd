@@ -42,10 +42,26 @@ options are NA, "conditional", "predictive", and "EB" (see below for
 details). Defaults to NA.}
 }
 \value{
-A designPrior object
+Returns an object of class \code{"designPrior"} which is a list
+containing:\tabular{ll}{
+   \code{dpMean} \tab The computed mean of the design prior. \cr
+   \tab \cr
+   \code{dpVar} \tab The computed variance of the design prior. \cr
+   \tab \cr
+   \code{to} \tab The specified original effect estimate. \cr
+   \tab \cr
+   \code{so} \tab The specified original standard error. \cr
+   \tab \cr
+   \code{mu} \tab The specified mean of the initial prior. \cr
+   \tab \cr
+   \code{sp} \tab The specified standard deviation of the initial prior. \cr
+   \tab \cr
+   \code{tau} \tab The specified heterogeneity variance. \cr
+}
 }
 \description{
-Creates a design prior object.
+Creates a design prior object from the data of the original
+    study and an initial prior for the effect size.
 }
 \details{
 The "conditional" design prior corresponds to a point mass at the

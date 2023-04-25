@@ -18,9 +18,8 @@
 #'     estimates from original and replication study have a different sign)?
 #'     Defaults to TRUE.
 #'
-#' @return An ssdRS object containing the design prior, the recomputed power,
-#'     the required replication standard error sr, and the relative sample size
-#'     c = so^2/sr^2 = nr/no
+#' @return Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
+#'     details.
 #'
 #' @references
 #'
@@ -32,7 +31,7 @@
 #' of a replication attempt. Journal of Experimental Psychology: General,
 #' 145:1457-1475. \doi{10.1037/a0036731}
 #'
-#' Ly, A., Etz, A., Marsman, M., & Wagenmakers, E.-J. (2018). Replication Bayes
+#' Ly, A., Etz, A., Marsman, M., and Wagenmakers, E.-J. (2018). Replication Bayes
 #' factors from evidence updating. Behavior Research Methods, 51(6), 2498-2508.
 #' \doi{10.3758/s13428-018-1092-x}
 #'

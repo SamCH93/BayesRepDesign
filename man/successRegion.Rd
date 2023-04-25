@@ -8,11 +8,12 @@ successRegion(intervals)
 }
 \arguments{
 \item{intervals}{A 2xN matrix containing N disjoint intervals, the first
-entry containing the lower and the second entry containing the upper
-limit}
+column containing the lower and the second column containing the upper
+limits}
 }
 \value{
-A successRegion object
+Returns an object of class \code{"successRegion"} which is a matrix
+    containing the success intervals sorted in ascending order
 }
 \description{
 Creates a success region object

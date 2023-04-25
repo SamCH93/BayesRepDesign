@@ -16,9 +16,8 @@ replication success is achieved}
 \item{power}{Desired probability of replication success}
 }
 \value{
-An ssdRS object containing the design prior, the recomputed power,
-    the required replication standard error sr, and the relative sample size
-    c = so^2/sr^2 = nr/no
+Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
+    details.
 }
 \description{
 This function computes the standard error required to achieve

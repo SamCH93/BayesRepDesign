@@ -13,9 +13,19 @@
 #' @param searchInt Search interval for standard errors
 #' @param ... other arguments for uniroot
 #'
-#' @return An ssdRS object containing the design prior, the recomputed power,
-#'     the required replication standard error sr, and the relative sample size
-#'     c = so^2/sr^2 = nr/no
+#' @return Returns an object of class \code{"ssdRS"} which is a list containing:
+#' \tabular{ll}{
+#'    \code{designPrior} \tab The specified \code{"designPrior"} object. \cr
+#'    \tab \cr
+#'    \code{power} \tab The specified power. \cr
+#'    \tab \cr
+#'    \code{powerRecomputed} \tab The recomputed power. \cr
+#'    \tab \cr
+#'    \code{sr} \tab The required replication standard error \eqn{\sigma_r}{sr}. \cr
+#'    \tab \cr
+#'    \code{c} \tab The required relative sample size
+#'    \eqn{c = \sigma_o^2/\sigma_r^2 = n_r/n_o}{c = so^2/sr^2 =~ nr/no}. \cr
+#' }
 #'
 #' @references
 #'
@@ -102,10 +112,17 @@ ssd <- function(sregionfun, dprior, power, nsites = 1,
     return(out)
 }
 
-#' Print method for ssdRS object
+#' Print method for class \code{"ssdRS"}
 #' @method print ssdRS
-#' @param x An ssdRS object
+#'
+#' @param x Object of class \code{"ssdRS"}
 #' @param ... Other arguments
+#'
+#' @return Prints text summary in the console and invisibly returns the
+#'     \code{"ssdRS"} object
+#'
+#' @author Samuel Pawel
+#'
 #' @examples
 #' ## specify design prior
 #' to1 <- 2

@@ -3,10 +3,11 @@
 #' @description Creates a success region object
 #'
 #' @param intervals A 2xN matrix containing N disjoint intervals, the first
-#'     entry containing the lower and the second entry containing the upper
-#'     limit
+#'     column containing the lower and the second column containing the upper
+#'     limits
 #'
-#' @return A successRegion object
+#' @return Returns an object of class \code{"successRegion"} which is a matrix
+#'     containing the success intervals sorted in ascending order
 #'
 #' @author Samuel Pawel
 #'
@@ -44,10 +45,17 @@ successRegion <- function(intervals) {
     return(intervalsSorted)
 }
 
-#' Print method for successRegion object
+#' Print method for class \code{"successRegion"}
 #' @method print successRegion
-#' @param x A successRegion object
+#'
+#' @param x Object of class \code{"successRegion"}
 #' @param ... Other arguments
+#'
+#' @return Prints text summary in the console and invisibly returns the
+#'     \code{"successRegion"} object
+#'
+#' @author Samuel Pawel
+#'
 #' @examples
 #' ## success region for two-sided significance test
 #' successRegion(intervals = rbind(c(1.96, Inf), c(-Inf, -1.96)))

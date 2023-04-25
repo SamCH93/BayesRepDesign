@@ -2,19 +2,26 @@
 % Please edit documentation in R/designPrior.R
 \name{print.designPrior}
 \alias{print.designPrior}
-\title{Print method for design prior object}
+\title{Print method for class \code{"designPrior"}}
 \usage{
 \method{print}{designPrior}(x, ...)
 }
 \arguments{
-\item{x}{A designPrior object}
+\item{x}{Object of class \code{"designPrior"}}
 
 \item{...}{Other arguments}
 }
+\value{
+Prints text summary in the console and invisibly returns the
+    \code{"designPrior"} object
+}
 \description{
-Print method for design prior object
+Print method for class \code{"designPrior"}
 }
 \examples{
 dp <- designPrior(to = 0.5, so = 0.05, sp = 0.2, tau = 0.1)
 print(dp)
+}
+\author{
+Samuel Pawel
 }

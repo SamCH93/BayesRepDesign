@@ -1,6 +1,7 @@
 #' @title Design prior for effect size
 #' 
-#' @description Creates a design prior object.
+#' @description Creates a design prior object from the data of the original
+#'     study and an initial prior for the effect size.
 #'
 #' @param to Effect estimate from original study \eqn{\hat{\theta}_o}{to}
 #' @param so Standard error of effect estimate from original study
@@ -26,7 +27,22 @@
 #'     The "EB" design prior is obtained by empirical Bayes estimation of the
 #'     variance of the normal prior.
 #'
-#' @return A designPrior object
+#' @return Returns an object of class \code{"designPrior"} which is a list
+#' containing:\tabular{ll}{
+#'    \code{dpMean} \tab The computed mean of the design prior. \cr
+#'    \tab \cr
+#'    \code{dpVar} \tab The computed variance of the design prior. \cr
+#'    \tab \cr
+#'    \code{to} \tab The specified original effect estimate. \cr
+#'    \tab \cr
+#'    \code{so} \tab The specified original standard error. \cr
+#'    \tab \cr
+#'    \code{mu} \tab The specified mean of the initial prior. \cr
+#'    \tab \cr
+#'    \code{sp} \tab The specified standard deviation of the initial prior. \cr
+#'    \tab \cr
+#'    \code{tau} \tab The specified heterogeneity variance. \cr
+#' }
 #'
 #' @author Samuel Pawel
 #'
@@ -116,10 +132,17 @@ designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
 }
 
 
-#' Print method for design prior object
+#' Print method for class \code{"designPrior"}
 #' @method print designPrior
-#' @param x A designPrior object
+#'
+#' @param x Object of class \code{"designPrior"}
 #' @param ... Other arguments
+#'
+#' @return Prints text summary in the console and invisibly returns the
+#'     \code{"designPrior"} object
+#'
+#' @author Samuel Pawel
+#'
 #' @examples
 #' dp <- designPrior(to = 0.5, so = 0.05, sp = 0.2, tau = 0.1)
 #' print(dp)
@@ -144,14 +167,20 @@ print.designPrior <- function(x, ...) {
     invisible(x)
 }
 
-#' Density method for design prior object
+#' Density method for class \code{"designPrior"}
 #' @method density designPrior
-#' @param x A designPrior object
+#'
+#' @param x Object of class \code{"designPrior"}
 #' @param ... Other arguments
+#'
+#' @return Returns the density function of the design prior
+#'
+#' @author Samuel Pawel
+#'
 #' @examples
 #' dp <- designPrior(to = 2.3123, so = 0.1, mu = 1.1, tau = 0.2)
 #' f <- density(dp)
-#' tseq <- seq(1, 3, 0.01)
+#' tseq <- seq(1, 3.5, 0.01)
 #' plot(tseq, f(theta = tseq), type = "l", xlab = "theta", ylab = "Design prior density")
 #' @importFrom stats density
 #' @export
@@ -164,10 +193,16 @@ density.designPrior <- function(x, ...) {
     return(densFun)
 }
 
-#' Plot method for design prior object
+#' Plot method for class \code{"designPrior"}
 #' @method plot designPrior
-#' @param x A designPrior object
+#'
+#' @param x Object of class \code{"designPrior"}
 #' @param ... Other arguments
+#'
+#' @return Plots the density of the design prior
+#'
+#' @author Samuel Pawel
+#'
 #' @examples
 #' dp <- designPrior(to = 2.3123, so = 0.1, mu = 1.1, tau = 0.2)
 #' plot(dp)

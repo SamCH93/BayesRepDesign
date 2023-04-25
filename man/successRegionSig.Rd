@@ -23,7 +23,8 @@ effect estimate (one-sided in the same direction as the original effect
 estimate)}
 }
 \value{
-A successRegion object
+An object of class \code{"successRegion"}. See
+    \code{\link{successRegion}} for details.
 }
 \description{
 This function returns the success region for the (average)
