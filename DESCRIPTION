@@ -1,7 +1,7 @@
 Package: BayesRepDesign
 Version: 0.42
-Date: 2023-04-25
-Authors@R:
+Date: 2023-04-26
+Authors@R: 
     person(given = "Samuel",
            family = "Pawel",
            role = c("aut", "cre"),
@@ -14,7 +14,7 @@ Description: Provides functionality for determining the sample size of replicati
 License: GPL-3
 Encoding: UTF-8
 Imports: methods, lamW
-Suggests: roxygen2, testthat
+Suggests: roxygen2, tinytest
 RoxygenNote: 7.2.3
 NeedsCompilation: no
 URL: https://github.com/SamCH93/BayesRepDesign

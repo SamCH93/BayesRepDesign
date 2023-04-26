@@ -136,7 +136,7 @@ designPrior <- function(to, so, mu = 0, sp = Inf, tau = 0,
 #' @method print designPrior
 #'
 #' @param x Object of class \code{"designPrior"}
-#' @param ... Other arguments
+#' @param ... Other arguments (for consistency with the generic)
 #'
 #' @return Prints text summary in the console and invisibly returns the
 #'     \code{"designPrior"} object
@@ -171,7 +171,7 @@ print.designPrior <- function(x, ...) {
 #' @method density designPrior
 #'
 #' @param x Object of class \code{"designPrior"}
-#' @param ... Other arguments
+#' @param ... Other arguments passed to \code{stats::dnorm}
 #'
 #' @return Returns the density function of the design prior
 #'
@@ -187,7 +187,7 @@ print.designPrior <- function(x, ...) {
 density.designPrior <- function(x, ...) {
     ## return design prior density function for the overall effect size (theta)
     densFun <- function(theta) {
-        d <- stats::dnorm(x = theta, mean = x$dpMean, sd = sqrt(x$dpVar))
+        d <- stats::dnorm(x = theta, mean = x$dpMean, sd = sqrt(x$dpVar), ...)
         return(d)
     }
     return(densFun)
@@ -197,7 +197,7 @@ density.designPrior <- function(x, ...) {
 #' @method plot designPrior
 #'
 #' @param x Object of class \code{"designPrior"}
-#' @param ... Other arguments
+#' @param ... Other arguments passed to \code{plot}
 #'
 #' @return Plots the density of the design prior
 #'

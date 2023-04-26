@@ -2,7 +2,7 @@ citHeader(paste("To cite the R-package 'BayesRepDesign' in publications,",
                 "please use:"))
 
 bibentry(bibtype = "Misc",
-         title = "Evidential Calibration of Confidence Intervals",
+         title = "Bayesian approaches to designing replication studies",
          author = c(person(given = "Samuel", family = "Pawel", role = "aut"),
                     person(given = "Guido", family = "Consonni", role = "aut"),
                     person(given = "Leonhard", family = "Held", role = "aut")),

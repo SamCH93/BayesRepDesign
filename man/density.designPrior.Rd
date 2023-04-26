@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{Object of class \code{"designPrior"}}
 
-\item{...}{Other arguments}
+\item{...}{Other arguments passed to \code{stats::dnorm}}
 }
 \value{
 Returns the density function of the design prior

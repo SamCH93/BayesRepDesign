@@ -26,7 +26,7 @@ have the same sample size.}
 
 \item{searchInt}{Search interval for standard errors}
 
-\item{...}{other arguments for uniroot}
+\item{...}{other arguments passde to \code{uniroot}}
 }
 \value{
 Returns an object of class \code{"ssdRS"} which is a list containing:

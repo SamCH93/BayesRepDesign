@@ -11,7 +11,7 @@
 #' @param nsites Number of sites. The default is 1. The sites are assumed to
 #'     have the same sample size.
 #' @param searchInt Search interval for standard errors
-#' @param ... other arguments for uniroot
+#' @param ... other arguments passde to \code{uniroot}
 #'
 #' @return Returns an object of class \code{"ssdRS"} which is a list containing:
 #' \tabular{ll}{
@@ -116,7 +116,7 @@ ssd <- function(sregionfun, dprior, power, nsites = 1,
 #' @method print ssdRS
 #'
 #' @param x Object of class \code{"ssdRS"}
-#' @param ... Other arguments
+#' @param ... Other arguments (for consistency with the generic)
 #'
 #' @return Prints text summary in the console and invisibly returns the
 #'     \code{"ssdRS"} object

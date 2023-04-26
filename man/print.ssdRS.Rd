@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{Object of class \code{"ssdRS"}}
 
-\item{...}{Other arguments}
+\item{...}{Other arguments (for consistency with the generic)}
 }
 \value{
 Prints text summary in the console and invisibly returns the
