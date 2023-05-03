@@ -1,6 +1,6 @@
 # BayesRepDesign 0.42
 
-- CRAN release
+- CRAN submission
 - New functions:
   * `designPrior`
   * `pors`
