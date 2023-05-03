@@ -3,14 +3,17 @@
 #'
 #' @description This function computes the standard error required to achieve
 #'     replication success with a certain probability and based on effect size
-#'     equivalence of original and replication effect size
+#'     equivalence of original and replication effect size. Effect size
+#'     equivalence is defined by the confidence interval for the difference
+#'     between the original and replication effect sizes falling within an
+#'     equivalence region around zero defined by the specified margin.
 #'
 #' @param level 1 - confidence level of confidence interval for effect size
 #'     difference
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
-#' @param margin The equivalence margin > 0 for the equivalence region around
-#'     zero of the difference in effect size of original and replication study
+#' @param margin The equivalence margin > 0 for the symmetric equivalence region
+#'     around zero
 #' @param searchInt Interval for numerical search over replication standard
 #'     errors
 #'
@@ -115,13 +118,16 @@ ssdEqu <- function(level, dprior, power, margin, searchInt = c(0, 2)) {
 #' @title Probability of replication success based on effect size equivalence
 #'
 #' @description This function computes the probability to achieve replication
-#'     success on equivalence of original and replication effect size.
+#'     success on equivalence of original and replication effect size. Effect
+#'     size equivalence is defined by the confidence interval for the difference
+#'     between the original and replication effect sizes falling within an
+#'     equivalence region around zero defined by the specified margin.
 #'
 #' @param level 1 - confidence level of confidence interval for effect size
 #'     difference
 #' @param dprior Design prior object
-#' @param margin The equivalence margin > 0 for the equivalence region around
-#'     zero of the difference in effect size of original and replication study
+#' @param margin The equivalence margin > 0 for the symmetric equivalence region
+#'     around zero
 #' @param sr Replication standard error
 #'
 #' @return The probability to achieve replication success

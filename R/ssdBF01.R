@@ -12,9 +12,9 @@
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #' @param priormean Mean of the normal prior under the alternative. Defaults to
-#'     zero.
+#'     \code{0}
 #' @param priorvar Variance of the normal prior under the alternative. Defaults
-#'     to one.
+#'     to \code{1}
 #' @param searchInt Interval for numerical search over replication standard
 #'     errors
 #'
@@ -108,7 +108,7 @@ ssdBF01 <- function(level, dprior, power, priormean = 0, priorvar = 1,
 }
 
 
-#' @title Probability of replication success based on replication Bayes factor
+#' @title Probability of replication success based on Bayes factor
 #'
 #' @description This function computes the probability to achieve replication
 #'     success based on a Bayes factor. The Bayes factor is oriented so that
@@ -121,9 +121,9 @@ ssdBF01 <- function(level, dprior, power, priormean = 0, priorvar = 1,
 #' @param dprior Design prior object
 #' @param sr Replication standard error
 #' @param priormean Mean of the normal prior under the alternative. Defaults to
-#'     zero.
+#'     \code{0}
 #' @param priorvar Variance of the normal prior under the alternative. Defaults
-#'     to one.
+#'     to \code{1}
 #'
 #' @return The probability to achieve replication success
 #'

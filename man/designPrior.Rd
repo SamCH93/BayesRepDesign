@@ -16,59 +16,65 @@ designPrior(
 )
 }
 \arguments{
-\item{to}{Effect estimate from original study \eqn{\hat{\theta}_o}{to}}
+\item{to}{Effect estimate from original study}
 
-\item{so}{Standard error of effect estimate from original study
-\eqn{\sigma_o}{so}}
+\item{so}{Standard error of effect estimate from original study}
 
-\item{mu}{The prior mean \eqn{\mu_{\theta}}{mu}. The default is zero.}
+\item{mu}{The initial prior mean. Defaults to \code{0}}
 
-\item{sp}{The prior standard deviation \eqn{\sigma_{\theta}}{sp}. The default
-is infinity (an improper uniform prior).}
+\item{sp}{The initial prior standard deviation. Defaults to \code{Inf} (an
+improper uniform prior)}
 
-\item{tau}{The prior heterogeneity standard deviation \eqn{\tau}{tau}. The
-default is zero (no heterogeneity).}
+\item{tau}{The initial prior heterogeneity standard deviation. Defaults to
+\code{0} (no heterogeneity)}
 
-\item{g}{The relative prior variance \eqn{g = \sigma_{\theta}^2/( \tau^2 +
-\sigma_o^2)}{g = sp^2/(tau^2 + so^2)} (alternative parametrization of
-prior standard deviation \eqn{\sigma_{\theta}}{sp})}
+\item{g}{The relative initial prior variance \code{g} =
+\code{sp^2}/(\code{tau^2} + \code{so^2}) (alternative parametrization of
+prior standard deviation \code{sp})}
 
-\item{h}{The relative prior heterogeneity variance \eqn{h =
-\tau^2/\sigma_o^2}{h = tau^2/so^2} (alternative parametrization of prior
-heterogeneity standard deviation \eqn{\tau}{tau})}
+\item{h}{The relative initial prior heterogeneity variance \code{h} =
+\code{tau^2}/\code{so^2} (alternative parametrization of prior
+heterogeneity standard deviation \code{tau})}
 
 \item{type}{Shortcut for special parameter combinations. The available
-options are NA, "conditional", "predictive", and "EB" (see below for
-details). Defaults to NA.}
+options are \code{NA}, \code{"conditional"}, \code{"predictive"}, and
+\code{"EB"} (see details). Defaults to \code{NA}}
 }
 \value{
-Returns an object of class \code{"designPrior"} which is a list
-containing:\tabular{ll}{
-   \code{dpMean} \tab The computed mean of the design prior. \cr
+Returns an object of class \code{"designPrior"} which is a list containing:
+
+\tabular{ll}{
+   \code{dpMean} \tab The computed mean of the design prior \cr
    \tab \cr
-   \code{dpVar} \tab The computed variance of the design prior. \cr
+   \code{dpVar} \tab The computed variance of the design prior \cr
    \tab \cr
-   \code{to} \tab The specified original effect estimate. \cr
+   \code{to} \tab The specified original effect estimate \cr
    \tab \cr
-   \code{so} \tab The specified original standard error. \cr
+   \code{so} \tab The specified original standard error \cr
    \tab \cr
-   \code{mu} \tab The specified mean of the initial prior. \cr
+   \code{mu} \tab The specified mean of the initial prior \cr
    \tab \cr
-   \code{sp} \tab The specified standard deviation of the initial prior. \cr
+   \code{sp} \tab The specified standard deviation of the initial prior \cr
    \tab \cr
-   \code{tau} \tab The specified heterogeneity variance. \cr
+   \code{tau} \tab The specified heterogeneity variance \cr
 }
 }
 \description{
-Creates a design prior object from the data of the original
-    study and an initial prior for the effect size.
+Creates a design prior for the effect size which can then be
+    used for power and sample size calculations of a replication study. The
+    design prior is obtained from updating an initial prior for the effect
+    size by the data from the original study. A normal-normal hierarchical
+    model is assumed, see Pawel et al. (2022) for details.
 }
 \details{
-The "conditional" design prior corresponds to a point mass at the
-    original effect estimate. The "predictive" design prior is obtained from
-    updating a uniform initial prior by the likelihood of the original data.
-    The "EB" design prior is obtained by empirical Bayes estimation of the
-    variance of the normal prior.
+The \code{"conditional"} design prior corresponds to a point mass at
+    the original effect estimate, i.e., assuming that the true effect size is
+    equal to the original effect estimate. The \code{"predictive"} design
+    prior is obtained from updating a uniform initial prior by the likelihood
+    of the original data. The \code{"EB"} design prior is obtained by
+    empirical Bayes estimation of the variance of the normal prior and
+    induces adaptive shrinkage that depends on the p-value of the original
+    effect estimate.
 }
 \examples{
 designPrior(to = 1.1, so = 1)

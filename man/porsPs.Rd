@@ -19,7 +19,13 @@ The probability to achieve replication success
 }
 \description{
 This function computes the probability to achieve replication
-    success based on the sceptical p-value
+    success based on the sceptical p-value.
+}
+\details{
+The sceptical p-value is assumed to be uncalibrated as in Held
+    (2020). The package ReplicationSuccess allows for sample size and power
+    calculations with the recalibrated sceptical p-value
+    (\url{https://CRAN.R-project.org/package=ReplicationSuccess}).
 }
 \examples{
 ## specify design prior

@@ -12,22 +12,23 @@ successRegionSig(sr, to, tau = 0, nsites = 1, level)
 \item{to}{Original effect estimate}
 
 \item{tau}{Heterogeneity standard deviation used in the calculation of the
-weighted average replication effect estimate and its standard error.
-Defaults to 0 (fixed effects analysis).}
+meta-analytic replication effect estimate and its standard error.
+Defaults to \code{0} (fixed effects analysis)}
 
-\item{nsites}{nsites Number of sites, defaults to 1. The effect estimates
-from all sites are assumed to have the same standard error sr.}
+\item{nsites}{nsites Number of sites, defaults to \code{1}. The effect
+estimates from all sites are assumed to have the same standard error
+\code{sr}}
 
 \item{level}{Significance level for p-value of the (average) replication
-effect estimate (one-sided in the same direction as the original effect
-estimate)}
+effect estimate (one-sided and in the same direction as the original
+effect estimate)}
 }
 \value{
 An object of class \code{"successRegion"}. See
     \code{\link{successRegion}} for details.
 }
 \description{
-This function returns the success region for the (average)
+This function returns the success region for the (meta-analytic)
     replication effect estimate to achieve significance
 }
 \examples{

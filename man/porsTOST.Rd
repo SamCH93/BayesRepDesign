@@ -21,8 +21,9 @@ The probability to achieve replication success
 }
 \description{
 This function computes the probability to achieve replication
-    success based on establishing equivalence with the TOST procedure in the
-    replication study.
+    success based on establishing the absence of a practically relevant
+    effect size with the Two One-Sided Tests (TOST) procedure in
+    the replication study.
 }
 \examples{
 ## specify design prior

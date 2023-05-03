@@ -16,7 +16,8 @@ Returns an object of class \code{"successRegion"} which is a matrix
     containing the success intervals sorted in ascending order
 }
 \description{
-Creates a success region object
+Creates a success region object which can then be used for
+    computing the probability of replication success with \code{\link{pors}}.
 }
 \examples{
 successRegion(intervals = rbind(c(1.96, Inf), c(-Inf, -1.96)))

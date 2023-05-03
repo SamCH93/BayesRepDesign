@@ -15,8 +15,8 @@ difference}
 
 \item{power}{Desired probability of replication success}
 
-\item{margin}{The equivalence margin > 0 for the equivalence region around
-zero of the difference in effect size of original and replication study}
+\item{margin}{The equivalence margin > 0 for the symmetric equivalence region
+around zero}
 
 \item{searchInt}{Interval for numerical search over replication standard
 errors}
@@ -28,7 +28,10 @@ Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
 \description{
 This function computes the standard error required to achieve
     replication success with a certain probability and based on effect size
-    equivalence of original and replication effect size
+    equivalence of original and replication effect size. Effect size
+    equivalence is defined by the confidence interval for the difference
+    between the original and replication effect sizes falling within an
+    equivalence region around zero defined by the specified margin.
 }
 \examples{
 ## specify design prior

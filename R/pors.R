@@ -3,14 +3,14 @@
 #' @description This function computes the probabiliy of replication success
 #'     based on a success region for the replication effect estimate, a design
 #'     prior, and a replication standard error. If the specified number of sites
-#'     is larger than one, the supplied success region needs to be formulated in
-#'     terms of the average replication effect estimate.
+#'     is larger than 1, the supplied success region has to be formulated in
+#'     terms of the meta-analytic replication effect estimate across sites.
 #'
 #' @param sregion Success region for replication effect estimate
 #' @param dprior Design prior object
 #' @param sr Standard error of replication effect estimate
-#' @param nsites Number of sites, defaults to 1. The sites are assumed to have
-#'     the same standard error sr
+#' @param nsites Number of sites, defaults to \code{1}. The sites are assumed to
+#'     have the same standard error sr
 #'
 #' @return The probability of replication success
 #'

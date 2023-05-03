@@ -8,8 +8,8 @@
 ssdSig(level, dprior, power)
 }
 \arguments{
-\item{level}{Significance level (one-sided) for the replication effect
-estimate}
+\item{level}{Significance level for the replication effect estimate
+(one-sided and in the same direction as the original effect estimate)}
 
 \item{dprior}{Design prior object}
 

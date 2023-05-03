@@ -1,6 +1,7 @@
 #' @title Success region for replication effect estimate
 #'
-#' @description Creates a success region object
+#' @description Creates a success region object which can then be used for
+#'     computing the probability of replication success with \code{\link{pors}}.
 #'
 #' @param intervals A 2xN matrix containing N disjoint intervals, the first
 #'     column containing the lower and the second column containing the upper

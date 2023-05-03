@@ -3,10 +3,11 @@
 #'
 #' @description This function computes the standard error required to achieve
 #'     replication success with a certain probability and based on statistical
-#'     significance of the fixed-effects meta-analytic effect estimate.
+#'     significance of the fixed-effects meta-analytic effect estimate obtained
+#'     from combining original and replication effect estimates.
 #'
-#' @param level Significance level (one-sided) for the replication effect
-#'     estimate
+#' @param level Significance level for the replication effect estimate
+#'     (one-sided and in the same direction as the original effect estimate)
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #' @param searchInt Interval for numerical search over replication standard
@@ -95,11 +96,12 @@ ssdMeta <- function(level, dprior, power, searchInt = c(0, 10)) {
 #' @title Probability of replication success based on meta-analytic significance
 #'
 #' @description This function computes the probability to achieve replication
-#'     success on statistical significance of the (fixed effects) meta-analytic
-#'     effect estimate
+#'     success on statistical significance of the fixed-effects meta-analytic
+#'     effect estimate obtained from combining original and replication effect
+#'     estimates.
 #'
 #' @param level Significance level for p-value of the meta-analytic effect
-#'     estimate (one-sided in the same direction as the original effect
+#'     estimate (one-sided and in the same direction as the original effect
 #'     estimate)
 #' @param dprior Design prior object
 #' @param sr Replication standard error

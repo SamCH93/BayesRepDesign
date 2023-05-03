@@ -21,31 +21,31 @@ effect estimate as a function of the replication standard error}
 
 \item{power}{Desired probability of replication success}
 
-\item{nsites}{Number of sites. The default is 1. The sites are assumed to
-have the same sample size.}
+\item{nsites}{Number of sites. Defaults to \code{1}. The sites are assumed to
+have the same sample size}
 
 \item{searchInt}{Search interval for standard errors}
 
-\item{...}{other arguments passde to \code{uniroot}}
+\item{...}{Other arguments passed to \code{uniroot}}
 }
 \value{
 Returns an object of class \code{"ssdRS"} which is a list containing:
 \tabular{ll}{
-   \code{designPrior} \tab The specified \code{"designPrior"} object. \cr
+   \code{designPrior} \tab The specified \code{"designPrior"} object \cr
    \tab \cr
-   \code{power} \tab The specified power. \cr
+   \code{power} \tab The specified power \cr
    \tab \cr
-   \code{powerRecomputed} \tab The recomputed power. \cr
+   \code{powerRecomputed} \tab The recomputed power \cr
    \tab \cr
-   \code{sr} \tab The required replication standard error \eqn{\sigma_r}{sr}. \cr
+   \code{sr} \tab The required replication standard error \cr
    \tab \cr
-   \code{c} \tab The required relative sample size
-   \eqn{c = \sigma_o^2/\sigma_r^2 = n_r/n_o}{c = so^2/sr^2 =~ nr/no}. \cr
+   \code{c} \tab The required relative sample size \code{c = nr/no}
+   (assuming \code{so = unitSD/no} and \code{sr = unitSD/nr}) \cr
 }
 }
 \description{
 This function computes the standard error of the replication
-    effect estiamte required to achieve replication success with a certain
+    effect estimate required to achieve replication success with a certain
     probability and based on a certain type of success region.
 }
 \examples{

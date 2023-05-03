@@ -21,8 +21,14 @@ Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
 }
 \description{
 This function computes the standard error required to achieve
-    replication success with a certain probability and based on the
-    sceptical p-value
+    replication success with a certain probability and based on the sceptical
+    p-value.
+}
+\details{
+The sceptical p-value is assumed to be uncalibrated as in Held
+    (2020). The package ReplicationSuccess allows for sample size and power
+    calculations with the recalibrated sceptical p-value
+    (\url{https://CRAN.R-project.org/package=ReplicationSuccess}).
 }
 \examples{
 ## specify design prior

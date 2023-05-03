@@ -2,8 +2,13 @@
 #'     the sceptical p-value
 #'
 #' @description This function computes the standard error required to achieve
-#'     replication success with a certain probability and based on the
-#'     sceptical p-value
+#'     replication success with a certain probability and based on the sceptical
+#'     p-value.
+#'
+#' @details The sceptical p-value is assumed to be uncalibrated as in Held
+#'     (2020). The package ReplicationSuccess allows for sample size and power
+#'     calculations with the recalibrated sceptical p-value
+#'     (\url{https://CRAN.R-project.org/package=ReplicationSuccess}).
 #'
 #' @param level Threshold for the (one-sided) sceptical p-value below which
 #'     replication success is achieved
@@ -101,7 +106,12 @@ ssdPs <- function(level, dprior, power) {
 #' @title Probability of replication success based on the sceptical p-value
 #'
 #' @description This function computes the probability to achieve replication
-#'     success based on the sceptical p-value
+#'     success based on the sceptical p-value.
+#'
+#' @details The sceptical p-value is assumed to be uncalibrated as in Held
+#'     (2020). The package ReplicationSuccess allows for sample size and power
+#'     calculations with the recalibrated sceptical p-value
+#'     (\url{https://CRAN.R-project.org/package=ReplicationSuccess}).
 #'
 #' @param level Threshold for the (one-sided) sceptical p-value below which
 #'     replication success is achieved

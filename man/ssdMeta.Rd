@@ -8,8 +8,8 @@
 ssdMeta(level, dprior, power, searchInt = c(0, 10))
 }
 \arguments{
-\item{level}{Significance level (one-sided) for the replication effect
-estimate}
+\item{level}{Significance level for the replication effect estimate
+(one-sided and in the same direction as the original effect estimate)}
 
 \item{dprior}{Design prior object}
 
@@ -25,7 +25,8 @@ Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
 \description{
 This function computes the standard error required to achieve
     replication success with a certain probability and based on statistical
-    significance of the fixed-effects meta-analytic effect estimate.
+    significance of the fixed-effects meta-analytic effect estimate obtained
+    from combining original and replication effect estimates.
 }
 \examples{
 ## specify design prior

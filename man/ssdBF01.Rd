@@ -22,10 +22,10 @@ ssdBF01(
 \item{power}{Desired probability of replication success}
 
 \item{priormean}{Mean of the normal prior under the alternative. Defaults to
-zero.}
+\code{0}}
 
 \item{priorvar}{Variance of the normal prior under the alternative. Defaults
-to one.}
+to \code{1}}
 
 \item{searchInt}{Interval for numerical search over replication standard
 errors}

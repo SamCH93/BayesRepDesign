@@ -12,8 +12,8 @@ difference}
 
 \item{dprior}{Design prior object}
 
-\item{margin}{The equivalence margin > 0 for the equivalence region around
-zero of the difference in effect size of original and replication study}
+\item{margin}{The equivalence margin > 0 for the symmetric equivalence region
+around zero}
 
 \item{sr}{Replication standard error}
 }
@@ -22,7 +22,10 @@ The probability to achieve replication success
 }
 \description{
 This function computes the probability to achieve replication
-    success on equivalence of original and replication effect size.
+    success on equivalence of original and replication effect size. Effect
+    size equivalence is defined by the confidence interval for the difference
+    between the original and replication effect sizes falling within an
+    equivalence region around zero defined by the specified margin.
 }
 \examples{
 ## specify design prior

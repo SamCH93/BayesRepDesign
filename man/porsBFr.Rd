@@ -16,14 +16,17 @@ porsBFr(level, dprior, sr, paradox = TRUE)
 \item{paradox}{Should the probability of replication success be computed
 allowing for the replication paradox (replication success when the effect
 estimates from original and replication study have a different sign)?
-Defaults to TRUE.}
+Defaults to \code{TRUE}}
 }
 \value{
 The probability to achieve replication success
 }
 \description{
 This function computes the probability to achieve replication
-    success based on the replication Bayes factor
+    success based on the replication Bayes factor. The replication Bayes
+    factor is assumed to be oriented so that values below one indicate
+    replication success, whereas values above one indicate evidence for the
+    null hypothesis.
 }
 \examples{
 ## specify design prior

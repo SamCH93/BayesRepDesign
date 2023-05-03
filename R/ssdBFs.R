@@ -6,8 +6,8 @@
 #'     Bayes factor. The sceptical Bayes factor is assumed to be oriented so
 #'     that values below one indicate replication success.
 #'
-#' @param level Threshold for the sceptical Bayes factor below which
-#'     replication success is achieved
+#' @param level Threshold for the sceptical Bayes factor below which replication
+#'     success is achieved
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #' @param searchInt Interval for numerical search over replication standard
@@ -15,7 +15,7 @@
 #' @param paradox Should the probability of replication success be computed
 #'     allowing for the replication paradox (replication success when the effect
 #'     estimates from original and replication study have a different sign)?
-#'     Defaults to TRUE.
+#'     Defaults to \code{TRUE}
 #'
 #' @return Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
 #'     details.
@@ -110,7 +110,9 @@ ssdBFs <- function(level, dprior, power,
 #' @title Probability of replication success based on the sceptical Bayes factor
 #'
 #' @description This function computes the probability to achieve replication
-#'     success based on the Bayes factor
+#'     success based on the sceptical Bayes factor. The sceptical Bayes factor
+#'     is assumed to be oriented so that values below one indicate replication
+#'     success.
 #'
 #' @param level Threshold for the sceptical Bayes factor below which replication
 #'     success is achieved
@@ -119,7 +121,7 @@ ssdBFs <- function(level, dprior, power,
 #' @param paradox Should the probability of replication success be computed
 #'     allowing for the replication paradox (replication success when the effect
 #'     estimates from original and replication study have a different sign)?
-#'     Defaults to TRUE.
+#'     Defaults to \code{TRUE}
 #'
 #' @return The probability to achieve replication success
 #'
@@ -140,7 +142,7 @@ ssdBFs <- function(level, dprior, power,
 #' to1 <- 0.2
 #' so1 <- 0.05
 #' dprior <- designPrior(to = to1, so = so1)
-#' porsBFs(level = 1/38.7, dprior = dprior, sr = 0.05)
+#' porsBFs(level = 1/3, dprior = dprior, sr = 0.05)
 #'
 #' @export
 

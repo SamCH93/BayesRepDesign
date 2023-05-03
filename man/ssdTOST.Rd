@@ -27,7 +27,8 @@ Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
 \description{
 This function computes the standard error required to achieve
     replication success with a certain probability and based on establishing
-    equivalence with the TOST procedure in the replication study.
+    the absence of a practically relevant effect size with the Two One-Sided
+    Tests (TOST) procedure in the replication study.
 }
 \examples{
 ## specify design prior
@@ -41,6 +42,10 @@ ssdTOST(level = 0.05, dprior = dprior, power = 0.9, margin = 0.3)
 Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
 designing replication studies. arXiv preprint.
 \doi{10.48550/arXiv.2211.02552}
+
+Anderson, S. F. and Maxwell, S. E. (2016). There's more than one way to
+conduct a replication study: Beyond statistical significance. Psychological
+Methods, 21(1), 1-12. \doi{10.1037/met0000051}
 }
 \author{
 Samuel Pawel

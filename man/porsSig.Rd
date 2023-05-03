@@ -8,7 +8,7 @@ porsSig(level, dprior, sr)
 }
 \arguments{
 \item{level}{Significance level for p-value of the replication effect
-estimate (one-sided in the same direction as the original effect
+estimate (one-sided and in the same direction as the original effect
 estimate)}
 
 \item{dprior}{Design prior object}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ssdBF01.R
 \name{porsBF01}
 \alias{porsBF01}
-\title{Probability of replication success based on replication Bayes factor}
+\title{Probability of replication success based on Bayes factor}
 \usage{
 porsBF01(level, dprior, sr, priormean = 0, priorvar = 1)
 }
@@ -14,10 +14,10 @@ porsBF01(level, dprior, sr, priormean = 0, priorvar = 1)
 \item{sr}{Replication standard error}
 
 \item{priormean}{Mean of the normal prior under the alternative. Defaults to
-zero.}
+\code{0}}
 
 \item{priorvar}{Variance of the normal prior under the alternative. Defaults
-to one.}
+to \code{1}}
 }
 \value{
 The probability to achieve replication success

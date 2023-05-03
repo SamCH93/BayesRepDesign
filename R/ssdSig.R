@@ -5,8 +5,8 @@
 #'     replication success with a certain probability and based on statistical
 #'     significance of the replication effect estimate.
 #'
-#' @param level Significance level (one-sided) for the replication effect
-#'     estimate
+#' @param level Significance level for the replication effect estimate
+#'     (one-sided and in the same direction as the original effect estimate)
 #' @param dprior Design prior object
 #' @param power Desired probability of replication success
 #'
@@ -95,7 +95,7 @@ ssdSig <- function(level, dprior, power) {
 #'     success on statistical significance of the replication effect estimate.
 #'
 #' @param level Significance level for p-value of the replication effect
-#'     estimate (one-sided in the same direction as the original effect
+#'     estimate (one-sided and in the same direction as the original effect
 #'     estimate)
 #' @param dprior Design prior object
 #' @param sr Replication standard error
@@ -148,19 +148,20 @@ porsSig <- function(level, dprior, sr) {
 
 #' @title Success region based on significance
 #'
-#' @description This function returns the success region for the (average)
+#' @description This function returns the success region for the (meta-analytic)
 #'     replication effect estimate to achieve significance
 #'
 #' @param sr Replication standard error
 #' @param to Original effect estimate
 #' @param tau Heterogeneity standard deviation used in the calculation of the
-#'     weighted average replication effect estimate and its standard error.
-#'     Defaults to 0 (fixed effects analysis).
-#' @param nsites nsites Number of sites, defaults to 1. The effect estimates
-#'     from all sites are assumed to have the same standard error sr.
+#'     meta-analytic replication effect estimate and its standard error.
+#'     Defaults to \code{0} (fixed effects analysis)
+#' @param nsites nsites Number of sites, defaults to \code{1}. The effect
+#'     estimates from all sites are assumed to have the same standard error
+#'     \code{sr}
 #' @param level Significance level for p-value of the (average) replication
-#'     effect estimate (one-sided in the same direction as the original effect
-#'     estimate)
+#'     effect estimate (one-sided and in the same direction as the original
+#'     effect estimate)
 #'
 #' @return An object of class \code{"successRegion"}. See
 #'     \code{\link{successRegion}} for details.

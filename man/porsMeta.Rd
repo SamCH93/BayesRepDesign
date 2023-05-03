@@ -8,7 +8,7 @@ porsMeta(level, dprior, sr)
 }
 \arguments{
 \item{level}{Significance level for p-value of the meta-analytic effect
-estimate (one-sided in the same direction as the original effect
+estimate (one-sided and in the same direction as the original effect
 estimate)}
 
 \item{dprior}{Design prior object}
@@ -20,8 +20,9 @@ The probability to achieve replication success
 }
 \description{
 This function computes the probability to achieve replication
-    success on statistical significance of the (fixed effects) meta-analytic
-    effect estimate
+    success on statistical significance of the fixed-effects meta-analytic
+    effect estimate obtained from combining original and replication effect
+    estimates.
 }
 \examples{
 ## specify design prior

@@ -26,7 +26,7 @@ errors}
 \item{paradox}{Should the probability of replication success be computed
 allowing for the replication paradox (replication success when the effect
 estimates from original and replication study have a different sign)?
-Defaults to TRUE.}
+Defaults to \code{TRUE}}
 }
 \value{
 Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
