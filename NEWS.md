@@ -1,3 +1,7 @@
+# BayesRepDesign 0.42.2
+
+- the accompanying paper is now published, citations updated
+
 # BayesRepDesign 0.42
 
 - CRAN submission

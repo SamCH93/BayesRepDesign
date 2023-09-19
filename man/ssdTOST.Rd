@@ -39,9 +39,9 @@ ssdTOST(level = 0.05, dprior = dprior, power = 0.9, margin = 0.3)
 
 }
 \references{
-Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
-designing replication studies. arXiv preprint.
-\doi{10.48550/arXiv.2211.02552}
+Pawel, S., Consonni, G., and Held, L. (2023). Bayesian approaches to
+designing replication studies. Psychological Methods.
+\doi{10.1037/met0000604}
 
 Anderson, S. F. and Maxwell, S. E. (2016). There's more than one way to
 conduct a replication study: Beyond statistical significance. Psychological

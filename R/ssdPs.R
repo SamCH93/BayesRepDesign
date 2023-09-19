@@ -122,9 +122,9 @@ ssdPs <- function(level, dprior, power) {
 #'
 #' @references
 #'
-#' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
-#' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.2211.02552}
+#' Pawel, S., Consonni, G., and Held, L. (2023). Bayesian approaches to
+#' designing replication studies. Psychological Methods.
+#' \doi{10.1037/met0000604}
 #'
 #' Held, L. (2020). A new standard for the analysis and design of replication
 #' studies (with discussion). Journal of the Royal Statistical Society: Series A

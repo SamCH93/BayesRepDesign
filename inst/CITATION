@@ -1,16 +1,15 @@
 citHeader(paste("To cite the R-package 'BayesRepDesign' in publications,",
                 "please use:"))
 
-bibentry(bibtype = "Misc",
+bibentry(bibtype = "Article",
          title = "Bayesian approaches to designing replication studies",
          author = c(person(given = "Samuel", family = "Pawel", role = "aut"),
                     person(given = "Guido", family = "Consonni", role = "aut"),
                     person(given = "Leonhard", family = "Held", role = "aut")),
-         doi = "10.48550/arXiv.2211.02552",
-         ## journal = "",
+         doi = "10.1037/met0000604",
+         journal = "Psychological Methods",
          ## volume = "",
          ## number = "",
          ## pages = "",
-         note = "arXiv Preprint",
-         year = "2022"
+         year = "2023"
          )

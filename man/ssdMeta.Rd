@@ -25,7 +25,7 @@ Returns an object of class \code{"ssdRS"}. See \code{\link{ssd}} for
 \description{
 This function computes the standard error required to achieve
     replication success with a certain probability and based on statistical
-    significance of the fixed-effects meta-analytic effect estimate obtained
+    significance of the fixed-effect meta-analytic effect estimate obtained
     from combining original and replication effect estimates.
 }
 \examples{
@@ -37,9 +37,9 @@ ssdMeta(level = 0.025^2, dprior = dprior, power = 0.95)
 
 }
 \references{
-Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
-designing replication studies. arXiv preprint.
-\doi{10.48550/arXiv.2211.02552}
+Pawel, S., Consonni, G., and Held, L. (2023). Bayesian approaches to
+designing replication studies. Psychological Methods.
+\doi{10.1037/met0000604}
 }
 \author{
 Samuel Pawel

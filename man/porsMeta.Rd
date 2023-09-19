@@ -20,7 +20,7 @@ The probability to achieve replication success
 }
 \description{
 This function computes the probability to achieve replication
-    success on statistical significance of the fixed-effects meta-analytic
+    success on statistical significance of the fixed-effect meta-analytic
     effect estimate obtained from combining original and replication effect
     estimates.
 }

@@ -20,9 +20,9 @@
 #'
 #' @references
 #'
-#' Pawel, S., Consonni, G., and Held, L. (2022). Bayesian approaches to
-#' designing replication studies. arXiv preprint.
-#' \doi{10.48550/arXiv.2211.02552}
+#' Pawel, S., Consonni, G., and Held, L. (2023). Bayesian approaches to
+#' designing replication studies. Psychological Methods.
+#' \doi{10.1037/met0000604}
 #'
 #' Spiegelhalter, D.J., Abrams, K.R., Myles, J.P. (2004). Bayesian approaches to
 #' clinical trials and health care evaluation. Wiley.
